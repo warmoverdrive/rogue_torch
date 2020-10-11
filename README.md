@@ -4,4 +4,4 @@
 ### Utilizes External Packages:
 * Cinemachine
 * Universal Rendering Pipeline
-* 2D Extras - https://github.com/Unity-Technologies/2d-extras
+* [2D Extras](https://github.com/Unity-Technologies/2d-extras) *(included)*
