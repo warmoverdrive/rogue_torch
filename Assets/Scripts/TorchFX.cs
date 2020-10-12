@@ -11,12 +11,21 @@ public class TorchFX : MonoBehaviour
     [SerializeField]
     float maxRandomLightIntensity = 1f;
     [SerializeField]
+    Color[] randomColors;
+    [SerializeField]
+    [Tooltip("1 in X chance per frame to change color.")]
+    int colorChangeChance = 25;
+    [SerializeField]
+    float colorChangeSpeed = 5f;
+    [SerializeField]
     [Range(0, 50)]
     int flickerSmoothing = 10;
 
-    [SerializeField]
     Light2D thisLight;
-
+    Color startingColor;
+    Color nextColor;
+    bool changingColor = false;
+    float startTime;
     Queue<float> smoothingQueue;
     float lastSum = 0;
 
@@ -27,6 +36,8 @@ public class TorchFX : MonoBehaviour
         smoothingQueue = new Queue<float>(flickerSmoothing);
         
         thisLight = GetComponent<Light2D>();
+
+        thisLight.color = randomColors[Random.Range(0, randomColors.Length - 1)];
     }
 
     // Update is called once per frame
@@ -47,5 +58,20 @@ public class TorchFX : MonoBehaviour
 
         //calculate new smoothed average
         thisLight.intensity = lastSum / smoothingQueue.Count;
+
+        // % chance to set new random color
+        if (Random.Range(0, colorChangeChance) == 1 && !changingColor)
+        {
+            nextColor = randomColors[Random.Range(0, randomColors.Length)];
+            startingColor = thisLight.color;
+            changingColor = true;
+            startTime = Time.time;
+        }
+
+        if (changingColor)
+        {
+            thisLight.color = Color.Lerp(startingColor, nextColor, (Time.time - startTime) * colorChangeSpeed);
+            if (thisLight.color == nextColor) changingColor = false;
+        }
     }
 }
