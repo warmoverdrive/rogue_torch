@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2d7d4182ac2594b97b8fdcf9456e83, type: 3}
+  m_Name: Castle Room Palette
+  m_EditorClassIdentifier: 
+  startRoom: {fileID: 9139666895026421942, guid: a3a2bb64befd39c499e6d9c857c1f449,
+    type: 3}
+  LRRooms:
+  - {fileID: 7903509644639826854, guid: 6191014bfb0273444a504405af068b8c, type: 3}
+  LRDRooms:
+  - {fileID: 4401991133542826522, guid: fc871c7b9627429408fe681135551dc7, type: 3}
+  LRURooms:
+  - {fileID: 6215005855772661826, guid: 4c9f5b97fbdaf16499905a66c5e69c4b, type: 3}
+  LRUDRooms:
+  - {fileID: 3323185678017539636, guid: d4ce58f63df5f2f4991c7aa51d1aedb1, type: 3}
+  UDRooms:
+  - {fileID: 450674698027980764, guid: 65ea4aec8ee8457429fc9bcafbc6a6f2, type: 3}
+  LRooms:
+  - {fileID: 8671597217259494276, guid: 2b0fdedf0594ebc459bea2ab42b0e875, type: 3}
+  RRooms:
+  - {fileID: 2135300385063542040, guid: 131062161ece3934bb317592e4398826, type: 3}
+  URooms:
+  - {fileID: 67659215464976859, guid: a36eb19817a86bf46b420160856df57d, type: 3}
+  DRooms:
+  - {fileID: 6161405396145578599, guid: 970c2010d80119d4595c61ee648a506d, type: 3}
