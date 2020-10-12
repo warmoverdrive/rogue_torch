@@ -55,8 +55,8 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 1
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0.6
-  m_ShadowVolumeIntensity: 0.603
+  m_ShadowIntensity: 0.523
+  m_ShadowVolumeIntensity: 0.268
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.65
@@ -87,7 +87,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minRandomLightIntensity: 0.5
   maxRandomLightIntensity: 1.5
-  randomColors: []
+  randomColors:
+  - {r: 0.9686275, g: 0.5882353, b: 0.09019608, a: 1}
+  - {r: 0.9843138, g: 0.41960788, b: 0.1137255, a: 1}
+  - {r: 0.9176471, g: 0.30980393, b: 0.21176472, a: 1}
   colorChangeChance: 25
   colorChangeSpeed: 5
   flickerSmoothing: 15
@@ -536,4 +539,4 @@ MonoBehaviour:
   - {x: -0.41299486, y: 0.22592306, z: 0}
   m_ShapePathHash: 654946053
   m_Mesh: {fileID: 0}
-  m_InstanceId: 32468
+  m_InstanceId: 34640

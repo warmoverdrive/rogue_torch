@@ -5,7 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField]
-    RoomPalette roomPalette;
+    public RoomPalette roomPalette;
     [SerializeField]
     public Type roomType;
 
@@ -63,4 +63,9 @@ public class Room : MonoBehaviour
 
         Instantiate(roomToSpawn, new Vector2(xSpawnPos, ySpawnPos), Quaternion.identity, parent);
     }
+
+    public Type GetRandomType()
+	{
+        return (Type)Random.Range(0, 8);
+	}
 }

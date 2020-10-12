@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
+  m_SubmitButton: Confirm
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
@@ -235,7 +235,8 @@ MonoBehaviour:
   roomWidth: 32
   roomHeight: 18
   levelWidthInRooms: 8
-  levelHeightInRooms: 5
+  levelHeightInRooms: 8
+  numberOfDeadEnds: 5
 --- !u!1 &495583978
 GameObject:
   m_ObjectHideFlags: 0
