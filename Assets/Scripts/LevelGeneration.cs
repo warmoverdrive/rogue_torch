@@ -17,8 +17,11 @@ public class LevelGeneration : MonoBehaviour
 
     private Room[,] castleMap;
     private Transform parentObject;
-    private int startingRoomY;
-    private int endingRoomY;
+
+	//storage Vector2Ints of key points for pathfinding
+	private Vector2Int startingRoom;
+	private Vector2Int endingRoom;
+	private List<Vector2Int> deadEndGrids;
 
     private void Awake()
 	{
@@ -28,23 +31,27 @@ public class LevelGeneration : MonoBehaviour
 		castleMap = new Room[levelWidthInRooms, levelHeightInRooms];
 
 		// determine starting point on left side castleMap[0, rand]
-		startingRoomY = Random.Range(0, levelHeightInRooms);
-		InitializeRoom(0, startingRoomY, Room.Type.StartRoom);
+		startingRoom = new Vector2Int(0, Random.Range(0, levelHeightInRooms));
+		InitializeRoom(startingRoom.x, startingRoom.y, Room.Type.StartRoom);
 
 		// determine end point on right side castleMap[levelWidthInRooms - 1, rand]
-		endingRoomY = Random.Range(0, levelHeightInRooms);
-		InitializeRoom(levelWidthInRooms - 1, endingRoomY, Room.Type.L);
+		endingRoom = new Vector2Int(levelWidthInRooms - 1, Random.Range(0, levelHeightInRooms));
+		InitializeRoom(endingRoom.x, endingRoom.y, Room.Type.L);
 
 		// generate dead ends randomly, checking spaces for start and end points before placing them
 		// store dead ends in list
+		GenerateDeadEnds();
 
-		// find path to exit, store path in list
+		// find path to exit via empty tiles, store path in list
 		// if no path, remove random dead end from list
 		// try to find path again... repeat until path found
 
 		// create rooms along path, checking surrounding rooms to not create unintentional dead ends
 
-		// Fill remaining rooms somehow...?
+		// create path back from dead ends to start
+		// change room type of path if needed to make it work
+
+		// Fill remaining rooms by checking neighbors for entrances and walls
 		FillRemainingRooms();
 
 		// Loop through array, generating all rooms
@@ -63,15 +70,49 @@ public class LevelGeneration : MonoBehaviour
 				GenerateRoom(0, 0);
 		*/
 	}
+
+	private void GenerateDeadEnds()
+	{
+		for (int deadEndsGenerated = 0; deadEndsGenerated < numberOfDeadEnds; deadEndsGenerated++)
+		{
+			int randX = Random.Range(0, levelWidthInRooms - 1);
+			int randY = Random.Range(0, levelHeightInRooms - 1);
+
+			if(CheckRoom(randX, randY) == null)
+			{
+				// check neighbors to see what kind of dead end to generate
+				// initialize dead end
+				// add dead end to list
+				deadEndGrids.Add(new Vector2Int(randX, randY));
+			}
+		}
+	}
+
+	private Room.Type CheckNeighbors(int currentX, int currentY, bool deadEnd)
+	{
+		bool up, down, left, right;
+		// Check +1/-1 in all directions and get room type
+		// for each, if they have an entrance in that direction, then Direction = true
+		// null also equals true, unless out of bounds
+		// if theres a wall in place, then direction is false
+		// if dead end, then pick from appropriate room tpyes at random
+		// if all false, pick blank room
+		// return appropriate Room.Type
+
+		return Room.Type.LRUD; // placeholder
+	}
+
 	private void FillRemainingRooms()
 	{
+		// iterate through entire grid
 		for (int x = 0; x < levelWidthInRooms; x++)
 		{
 			for (int y = 0; y < levelHeightInRooms; y++)
 			{
 				if (!CheckRoom(x, y))
 				{
-					InitializeRoom(x, y, roomArchetype.GetRandomType());
+					// Check neighbors for room type and initialize
+					InitializeRoom(x, y, CheckNeighbors(x, y, false));
 				}
 			}
 		}
@@ -79,6 +120,7 @@ public class LevelGeneration : MonoBehaviour
 
 	private void GenerateAllRooms()
 	{
+		// iterate through grid instantiating all rooms
 		for (int x = 0; x < levelWidthInRooms; x++)
 		{
 			for (int y = 0; y < levelHeightInRooms; y++)
@@ -110,6 +152,9 @@ public class LevelGeneration : MonoBehaviour
 
     private Room CheckRoom(int gridX, int gridY)
     {
+		// check for a room at gridX, gridY
+		// if it exists, return the Room with all associated data
+		// if it doesnt, return null.
         if (castleMap[gridX, gridY]) return castleMap[gridX, gridY];
         else return null;
     }
