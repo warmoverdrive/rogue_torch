@@ -12,18 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2d7d4182ac2594b97b8fdcf9456e83, type: 3}
   m_Name: Castle Room Palette
   m_EditorClassIdentifier: 
-  startRoom: {fileID: 9139666895026421942, guid: a3a2bb64befd39c499e6d9c857c1f449,
+  blankRoom: {fileID: 4813670672239498965, guid: dc47248451a686040b7a1f04b6ff5b9b,
     type: 3}
+  startRooms:
+  - {fileID: 9139666895026421942, guid: a3a2bb64befd39c499e6d9c857c1f449, type: 3}
+  endRooms:
+  - {fileID: 7903509644639826854, guid: 52ca20b1cffdf0c449a678e61f4c873e, type: 3}
   LRRooms:
   - {fileID: 7903509644639826854, guid: 6191014bfb0273444a504405af068b8c, type: 3}
-  LRDRooms:
-  - {fileID: 4401991133542826522, guid: fc871c7b9627429408fe681135551dc7, type: 3}
-  LRURooms:
-  - {fileID: 6215005855772661826, guid: 4c9f5b97fbdaf16499905a66c5e69c4b, type: 3}
-  LRUDRooms:
-  - {fileID: 3323185678017539636, guid: d4ce58f63df5f2f4991c7aa51d1aedb1, type: 3}
   UDRooms:
   - {fileID: 450674698027980764, guid: 65ea4aec8ee8457429fc9bcafbc6a6f2, type: 3}
+  LRUDRooms:
+  - {fileID: 3323185678017539636, guid: d4ce58f63df5f2f4991c7aa51d1aedb1, type: 3}
+  LRURooms:
+  - {fileID: 6215005855772661826, guid: 4c9f5b97fbdaf16499905a66c5e69c4b, type: 3}
+  LRDRooms:
+  - {fileID: 4401991133542826522, guid: fc871c7b9627429408fe681135551dc7, type: 3}
+  LUDRooms:
+  - {fileID: 2912949569764896141, guid: 1bc03efadf7098445911dec7d91100b8, type: 3}
+  RUDRooms:
+  - {fileID: 1379318800272197747, guid: 07658c49c2d9ff9428644afac5ad9dfe, type: 3}
+  LDRooms:
+  - {fileID: 7431091748439940350, guid: e9faab0cb36d9684e9262843fc65a316, type: 3}
+  LURooms:
+  - {fileID: 5606166365112611132, guid: edd81dc5a0f61d64eb1197293befb072, type: 3}
+  RURooms:
+  - {fileID: 6525720306916907897, guid: b1d45a63bedb1c345bef74b521760cea, type: 3}
+  RDRooms:
+  - {fileID: 3633337723654819784, guid: 928b8c0e42716e345b6ef6f8871c6e6b, type: 3}
   LRooms:
   - {fileID: 8671597217259494276, guid: 2b0fdedf0594ebc459bea2ab42b0e875, type: 3}
   RRooms:

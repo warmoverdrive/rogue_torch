@@ -21,7 +21,7 @@ public class LevelGeneration : MonoBehaviour
 	//storage Vector2Ints of key points for pathfinding
 	private Vector2Int startingRoom;
 	private Vector2Int endingRoom;
-	private List<Vector2Int> deadEndGrids;
+	private List<Vector2Int> deadEndGrids = new List<Vector2Int>();
 
     private void Awake()
 	{
@@ -36,10 +36,11 @@ public class LevelGeneration : MonoBehaviour
 
 		// determine end point on right side castleMap[levelWidthInRooms - 1, rand]
 		endingRoom = new Vector2Int(levelWidthInRooms - 1, Random.Range(0, levelHeightInRooms));
-		InitializeRoom(endingRoom.x, endingRoom.y, Room.Type.L);
+		InitializeRoom(endingRoom.x, endingRoom.y, Room.Type.EndRoom);
 
 		// generate dead ends randomly, checking spaces for start and end points before placing them
 		// store dead ends in list
+		Debug.Log("Generating Dead ends");
 		GenerateDeadEnds();
 
 		// find path to exit via empty tiles, store path in list
@@ -52,9 +53,11 @@ public class LevelGeneration : MonoBehaviour
 		// change room type of path if needed to make it work
 
 		// Fill remaining rooms by checking neighbors for entrances and walls
+		Debug.Log("Filling remaining rooms");
 		FillRemainingRooms();
 
 		// Loop through array, generating all rooms
+		Debug.Log("Generating Rooms in Game World...");
 		GenerateAllRooms();
 
 		/*
@@ -80,10 +83,16 @@ public class LevelGeneration : MonoBehaviour
 
 			if(CheckRoom(randX, randY) == null)
 			{
-				// check neighbors to see what kind of dead end to generate
-				// initialize dead end
-				// add dead end to list
-				deadEndGrids.Add(new Vector2Int(randX, randY));
+				Vector2Int deadEndPos = new Vector2Int(randX, randY);
+				if ((deadEndPos += Vector2Int.left) != startingRoom &&
+					(deadEndPos += Vector2Int.right) != endingRoom)
+				{
+					// check neighbors to see what kind of dead end to generate
+					// initialize dead end
+					InitializeRoom(randX, randY, CheckNeighbors(randX, randY, true));
+					// add dead end to list
+					deadEndGrids.Add(deadEndPos);
+				}
 			}
 		}
 	}
@@ -91,23 +100,158 @@ public class LevelGeneration : MonoBehaviour
 	private Room.Type CheckNeighbors(int currentX, int currentY, bool deadEnd)
 	{
 		bool up, down, left, right;
-		// Check +1/-1 in all directions and get room type
-		// for each, if they have an entrance in that direction, then Direction = true
-		// null also equals true, unless out of bounds
-		// if theres a wall in place, then direction is false
-		// if dead end, then pick from appropriate room tpyes at random
-		// if all false, pick blank room
-		// return appropriate Room.Type
+		List<Room.Type> acceptableTypes = new List<Room.Type>();
 
-		return Room.Type.LRUD; // placeholder
+		// Check Up
+		if (currentY + 1 < levelHeightInRooms) // check OOB (out of bounds)
+		{
+			Room checkedRoom = CheckRoom(currentX, currentY + 1);
+			if (checkedRoom != null)
+			{
+				//check if the room type has a downward exit
+				if (checkedRoom.roomType == Room.Type.D ||
+					checkedRoom.roomType == Room.Type.LRD ||
+					checkedRoom.roomType == Room.Type.LRUD ||
+					checkedRoom.roomType == Room.Type.UD ||
+					checkedRoom.roomType == Room.Type.LD ||
+					checkedRoom.roomType == Room.Type.RD ||
+					checkedRoom.roomType == Room.Type.LUD ||
+					checkedRoom.roomType == Room.Type.RUD) up = true;
+				else up = false;
+			}
+			else up = true;
+		}
+		else up = false;
+
+		// Check Down
+		if (currentY - 1 >= 0) // check OOB (out of bounds)
+		{
+			Room checkedRoom = CheckRoom(currentX, currentY - 1);
+			if (checkedRoom != null)
+			{
+				//check if the room type has a upward exit
+				if (checkedRoom.roomType == Room.Type.U ||
+					checkedRoom.roomType == Room.Type.LRU ||
+					checkedRoom.roomType == Room.Type.LRUD ||
+					checkedRoom.roomType == Room.Type.UD ||
+					checkedRoom.roomType == Room.Type.RU ||
+					checkedRoom.roomType == Room.Type.LU ||
+					checkedRoom.roomType == Room.Type.RUD ||
+					checkedRoom.roomType == Room.Type.LUD) down = true;
+				else down = false;
+			}
+			else down = true;
+		}
+		else down = false;
+
+		// Check Right
+		if (currentX + 1 < levelWidthInRooms) // check OOB (out of bounds)
+		{
+			Room checkedRoom = CheckRoom(currentX + 1, currentY);
+			if (checkedRoom != null)
+			{
+				//check if the room type has a leftward exit
+				if (checkedRoom.roomType == Room.Type.L ||
+					checkedRoom.roomType == Room.Type.LRU ||
+					checkedRoom.roomType == Room.Type.LRD ||
+					checkedRoom.roomType == Room.Type.LRUD ||
+					checkedRoom.roomType == Room.Type.LR ||
+					checkedRoom.roomType == Room.Type.LUD ||
+					checkedRoom.roomType == Room.Type.LU ||
+					checkedRoom.roomType == Room.Type.LD ||
+					checkedRoom.roomType == Room.Type.EndRoom) right = true;
+				else right = false;
+			}
+			else right = true;
+		}
+		else right = false;
+
+		// Check Left
+		if (currentX - 1 >= 0) // check OOB (out of bounds)
+		{
+			Room checkedRoom = CheckRoom(currentX - 1, currentY);
+			if (checkedRoom != null)
+			{
+				//check if the room type has a rightward exit
+				if (checkedRoom.roomType == Room.Type.R ||
+					checkedRoom.roomType == Room.Type.LRU ||
+					checkedRoom.roomType == Room.Type.LRD ||
+					checkedRoom.roomType == Room.Type.LRUD ||
+					checkedRoom.roomType == Room.Type.LR ||
+					checkedRoom.roomType == Room.Type.RUD ||
+					checkedRoom.roomType == Room.Type.RU ||
+					checkedRoom.roomType == Room.Type.RD ||
+					checkedRoom.roomType == Room.Type.StartRoom) left = true;
+				else left = false;
+			}
+			else left = true;
+		}
+		else left = false;
+
+		if(deadEnd)
+		{
+			// if dead end, then pick from appropriate room types at random
+			if (up) acceptableTypes.Add(Room.Type.U);
+			if (down) acceptableTypes.Add(Room.Type.D);
+			if (right) acceptableTypes.Add(Room.Type.R);
+			if (left) acceptableTypes.Add(Room.Type.L);
+
+			if (acceptableTypes.Count > 0)
+			{
+				return acceptableTypes[Random.Range(0, acceptableTypes.Count)];
+			}
+			// if all false, pick blank room
+			else return Room.Type.Blank;
+		}
+		else
+		{
+			// select and return appropriate Room.Type
+			return SelectRoomType(up, down, left, right);
+		}
+
+	}
+
+	private Room.Type SelectRoomType(bool up, bool down, bool left, bool right)
+	{
+		if (!up && !down && left && right)
+			return Room.Type.LR;
+		else if (up && down && !left && !right)
+			return Room.Type.UD;
+		else if (up && down && left && right)
+			return Room.Type.LRUD;
+		else if (up && !down && left && right)
+			return Room.Type.LRU;
+		else if (!up && down && left && right)
+			return Room.Type.LRD;
+		else if (up && down && left && !right)
+			return Room.Type.LUD;
+		else if (up && down && !left && right)
+			return Room.Type.RUD;
+		else if (!up && down && left && !right)
+			return Room.Type.LD;
+		else if (up && !down && left && !right)
+			return Room.Type.LU;
+		else if (up && !down && !left && right)
+			return Room.Type.RU;
+		else if (!up && down && !left && right)
+			return Room.Type.RD;
+		else if (!up && !down && left && !right)
+			return Room.Type.L;
+		else if (!up && !down && !left && right)
+			return  Room.Type.R;
+		else if (up && !down && !left && !right)
+			return Room.Type.U;
+		else if (!up && down && !left && !right)
+			return Room.Type.D;
+		else return Room.Type.Blank;
 	}
 
 	private void FillRemainingRooms()
 	{
 		// iterate through entire grid
-		for (int x = 0; x < levelWidthInRooms; x++)
+		for (int y = 0; y < levelHeightInRooms; y++)
 		{
-			for (int y = 0; y < levelHeightInRooms; y++)
+			for (int x = 0; x < levelWidthInRooms; x++)
 			{
 				if (!CheckRoom(x, y))
 				{
@@ -121,13 +265,12 @@ public class LevelGeneration : MonoBehaviour
 	private void GenerateAllRooms()
 	{
 		// iterate through grid instantiating all rooms
-		for (int x = 0; x < levelWidthInRooms; x++)
+		for (int y = 0; y < levelHeightInRooms; y++)
 		{
-			for (int y = 0; y < levelHeightInRooms; y++)
+			for (int x = 0; x < levelWidthInRooms; x++)
 			{
 				if (CheckRoom(x, y))
 				{
-					Debug.Log("Generating " + CheckRoom(x, y).roomType + "at " + x + " " + y);
 					GenerateRoom(x, y);
 				}
 			}
@@ -140,7 +283,6 @@ public class LevelGeneration : MonoBehaviour
         castleMap[gridX, gridY] = new GameObject().AddComponent<Room>();
         castleMap[gridX, gridY].roomPalette = roomArchetype.roomPalette;
         castleMap[gridX, gridY].roomType = roomType;
-        Debug.Log("Initialized "+castleMap[gridX, gridY].roomType);
 	}
 
     private void ChangeRoomType(int gridX, int gridY, Room.Type roomType) { castleMap[gridX, gridY].roomType = roomType; }

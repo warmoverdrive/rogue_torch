@@ -5,12 +5,20 @@ using UnityEditor;
     menuName = "ScriptableObjects/Room Palette Object", order = 1)]
 public class RoomPalette : ScriptableObject
 {
-    public GameObject startRoom;
-    public GameObject[] LRRooms,
-        LRDRooms,
-        LRURooms,
-        LRUDRooms,
+    public GameObject blankRoom;
+    public GameObject[] startRooms,
+        endRooms,
+        LRRooms,
         UDRooms,
+        LRUDRooms,
+        LRURooms,
+        LRDRooms,
+        LUDRooms,
+        RUDRooms,
+        LDRooms,
+        LURooms,
+        RURooms,
+        RDRooms,
         LRooms,
         RRooms,
         URooms,

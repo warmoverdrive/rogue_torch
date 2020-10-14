@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPalette: {fileID: 0}
-  roomType: 0
+  roomType: 6
 --- !u!61 &7537628817091239756
 BoxCollider2D:
   m_ObjectHideFlags: 0

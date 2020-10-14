@@ -234,9 +234,9 @@ MonoBehaviour:
     type: 3}
   roomWidth: 32
   roomHeight: 18
-  levelWidthInRooms: 8
-  levelHeightInRooms: 8
-  numberOfDeadEnds: 5
+  levelWidthInRooms: 5
+  levelHeightInRooms: 4
+  numberOfDeadEnds: 8
 --- !u!1 &495583978
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,10 +719,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -16, y: -45}
-      - {x: -16, y: 81}
-      - {x: 272, y: 81}
-      - {x: 272, y: -45}
+    - - {x: -16, y: -9}
+      - {x: -16, y: 99}
+      - {x: 272, y: 99}
+      - {x: 272, y: -9}
 --- !u!1 &1889016405
 GameObject:
   m_ObjectHideFlags: 0
