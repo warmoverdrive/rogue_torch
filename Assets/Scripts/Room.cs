@@ -9,6 +9,8 @@ public class Room : MonoBehaviour
     [SerializeField]
     public Type roomType;
 
+    public bool isDeadEnd = false;
+
     private GameObject roomToSpawn;
 
     public enum Type

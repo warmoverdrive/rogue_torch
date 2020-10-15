@@ -18,6 +18,8 @@ public class LevelGeneration : MonoBehaviour
     private Room[,] castleMap;
     private Transform parentObject;
 
+	private List<Vector2Int> path;
+
 	//storage Vector2Ints of key points for pathfinding
 	private Vector2Int startingRoom;
 	private Vector2Int endingRoom;
@@ -38,19 +40,34 @@ public class LevelGeneration : MonoBehaviour
 		endingRoom = new Vector2Int(levelWidthInRooms - 1, Random.Range(0, levelHeightInRooms));
 		InitializeRoom(endingRoom.x, endingRoom.y, Room.Type.EndRoom);
 
+		Debug.Log("Start room: " + startingRoom);
+		Debug.Log("Ending room: " + endingRoom);
 		// generate dead ends randomly, checking spaces for start and end points before placing them
 		// store dead ends in list
-		Debug.Log("Generating Dead ends");
 		GenerateDeadEnds();
+		foreach (var deadEnd in deadEndGrids)
+		{
+			Debug.Log("Dead end: " + deadEnd);
+		}
 
-		// find path to exit via empty tiles, store path in list
-		// if no path, remove random dead end from list
-		// try to find path again... repeat until path found
+		//Construct Pathfinder object (local scope to destroy after completion of Awake())
+		Pathfinder pathfinder = new Pathfinder(castleMap, startingRoom, endingRoom, deadEndGrids);
+		path = pathfinder.CalculatePath();
 
-		// create rooms along path, checking surrounding rooms to not create unintentional dead ends
+		// build path
+		// first loop is to destroy all dead ends blocking the path, 
+		// and the second one resets the rooms to have a valid room type
+		Debug.Log("Path:");
+		foreach (var point in path)
+		{
+			Debug.Log(point);
+			InitializeRoom(point.x, point.y, Room.Type.LRUD);
+		}
+		foreach (var point in path)
+		{
+			InitializeRoom(point.x, point.y, CheckNeighbors(point.x, point.y, false));
+		}
 
-		// create path back from dead ends to start
-		// change room type of path if needed to make it work
 
 		// Fill remaining rooms by checking neighbors for entrances and walls
 		Debug.Log("Filling remaining rooms");
@@ -59,19 +76,6 @@ public class LevelGeneration : MonoBehaviour
 		// Loop through array, generating all rooms
 		Debug.Log("Generating Rooms in Game World...");
 		GenerateAllRooms();
-
-		/*
-				//      *** Initializing and creating rooms ***    //
-
-				// Generate room object in the grid and initialize its type
-				InitializeRoom(0, 0, Room.Type.LR);
-
-				// If type change is needed:
-				ChangeRoomType(0, 0, Room.Type.StartRoom);
-
-				// Actually generates the room in the game world
-				GenerateRoom(0, 0);
-		*/
 	}
 
 	private void GenerateDeadEnds()
@@ -84,12 +88,12 @@ public class LevelGeneration : MonoBehaviour
 			if(CheckRoom(randX, randY) == null)
 			{
 				Vector2Int deadEndPos = new Vector2Int(randX, randY);
-				if ((deadEndPos += Vector2Int.left) != startingRoom &&
-					(deadEndPos += Vector2Int.right) != endingRoom)
+				if ((deadEndPos + Vector2Int.left) != startingRoom &&
+					(deadEndPos + Vector2Int.right) != endingRoom)
 				{
 					// check neighbors to see what kind of dead end to generate
 					// initialize dead end
-					InitializeRoom(randX, randY, CheckNeighbors(randX, randY, true));
+					InitializeRoom(randX, randY, CheckNeighbors(randX, randY, true), true);
 					// add dead end to list
 					deadEndGrids.Add(deadEndPos);
 				}
@@ -285,7 +289,15 @@ public class LevelGeneration : MonoBehaviour
         castleMap[gridX, gridY].roomType = roomType;
 	}
 
-    private void ChangeRoomType(int gridX, int gridY, Room.Type roomType) { castleMap[gridX, gridY].roomType = roomType; }
+	private void InitializeRoom(int gridX, int gridY, Room.Type roomType, bool isDeadEnd)
+	{
+		castleMap[gridX, gridY] = new GameObject().AddComponent<Room>();
+		castleMap[gridX, gridY].roomPalette = roomArchetype.roomPalette;
+		castleMap[gridX, gridY].roomType = roomType;
+		castleMap[gridX, gridY].isDeadEnd = isDeadEnd;
+	}
+
+	private void ChangeRoomType(int gridX, int gridY, Room.Type roomType) { castleMap[gridX, gridY].roomType = roomType; }
 
     private void GenerateRoom(int gridX, int gridY)
     {
