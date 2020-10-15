@@ -44,11 +44,12 @@ public class LevelGeneration : MonoBehaviour
 		Debug.Log("Ending room: " + endingRoom);
 		// generate dead ends randomly, checking spaces for start and end points before placing them
 		// store dead ends in list
-		GenerateDeadEnds();
+		GenerateDeadEndsList();
 		foreach (var deadEnd in deadEndGrids)
 		{
 			Debug.Log("Dead end: " + deadEnd);
 		}
+
 
 		//Construct Pathfinder object (local scope to destroy after completion of Awake())
 		Pathfinder pathfinder = new Pathfinder(castleMap, startingRoom, endingRoom, deadEndGrids);
@@ -68,6 +69,17 @@ public class LevelGeneration : MonoBehaviour
 			InitializeRoom(point.x, point.y, CheckNeighbors(point.x, point.y, false));
 		}
 
+		// initialize dead ends around path
+		foreach (var deadEnd in deadEndGrids)
+		{
+			if (CheckRoom(deadEnd.x, deadEnd.y) == null)
+			{
+				// check neighbors to see what kind of dead end to generate
+				// initialize dead end
+				InitializeRoom(deadEnd.x, deadEnd.y, 
+					CheckNeighbors(deadEnd.x, deadEnd.y, true), true);
+			}
+		}
 
 		// Fill remaining rooms by checking neighbors for entrances and walls
 		Debug.Log("Filling remaining rooms");
@@ -78,7 +90,7 @@ public class LevelGeneration : MonoBehaviour
 		GenerateAllRooms();
 	}
 
-	private void GenerateDeadEnds()
+	private void GenerateDeadEndsList()
 	{
 		for (int deadEndsGenerated = 0; deadEndsGenerated < numberOfDeadEnds; deadEndsGenerated++)
 		{
@@ -91,9 +103,6 @@ public class LevelGeneration : MonoBehaviour
 				if ((deadEndPos + Vector2Int.left) != startingRoom &&
 					(deadEndPos + Vector2Int.right) != endingRoom)
 				{
-					// check neighbors to see what kind of dead end to generate
-					// initialize dead end
-					InitializeRoom(randX, randY, CheckNeighbors(randX, randY, true), true);
 					// add dead end to list
 					deadEndGrids.Add(deadEndPos);
 				}

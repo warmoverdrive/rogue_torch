@@ -45,7 +45,7 @@ public class Pathfinder
 			cameFrom = new Dictionary<Vector2Int, Vector2Int>();
 
 			deadEndRooms.Remove(deadEndRooms[Random.Range(0, deadEndRooms.Count)]);
-			Debug.Log("dead ends left: "+deadEndRooms.Count);
+			Debug.LogWarning("dead ends left: "+deadEndRooms.Count);
 			BreadthFirstSearch();
 		}
 		Debug.LogWarning("Path completed: " + cameFrom.ContainsKey(endingRoom));
