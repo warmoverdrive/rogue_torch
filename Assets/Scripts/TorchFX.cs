@@ -62,7 +62,7 @@ public class TorchFX : MonoBehaviour
         // % chance to set new random color
         if (Random.Range(0, colorChangeChance) == 1 && !changingColor)
         {
-            nextColor = randomColors[Random.Range(0, randomColors.Length)];
+            nextColor = randomColors[Random.Range(0, randomColors.Length-1)];
             startingColor = thisLight.color;
             changingColor = true;
             startTime = Time.time;
