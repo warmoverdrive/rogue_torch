@@ -15,6 +15,8 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     int numberOfDeadEnds = 5;
 
+	private PolygonCollider2D polyCollider;
+
     private Room[,] castleMap;
     private Transform parentObject;
 
@@ -27,6 +29,11 @@ public class LevelGeneration : MonoBehaviour
 
     private void Awake()
 	{
+		// Set points for the polygon collider for Camera stuff
+		polyCollider = GetComponent<PolygonCollider2D>();
+		SetPoligonColliderBounds();
+
+		// Set the parent object to the Tilemap Grid for all of the created rooms
 		parentObject = transform.GetComponentInParent<Transform>();
 
 		// generate a virtual grid of the castle
@@ -69,18 +76,6 @@ public class LevelGeneration : MonoBehaviour
 			InitializeRoom(point.x, point.y, CheckNeighbors(point.x, point.y, false));
 		}
 
-		// initialize dead ends around path
-		foreach (var deadEnd in deadEndGrids)
-		{
-			if (CheckRoom(deadEnd.x, deadEnd.y) == null)
-			{
-				// check neighbors to see what kind of dead end to generate
-				// initialize dead end
-				InitializeRoom(deadEnd.x, deadEnd.y, 
-					CheckNeighbors(deadEnd.x, deadEnd.y, true), true);
-			}
-		}
-
 		// Fill remaining rooms by checking neighbors for entrances and walls
 		Debug.Log("Filling remaining rooms");
 		FillRemainingRooms();
@@ -105,7 +100,11 @@ public class LevelGeneration : MonoBehaviour
 				{
 					// add dead end to list
 					deadEndGrids.Add(deadEndPos);
+					//initialize blank room
+					InitializeRoom(randX, randY, Room.Type.Blank);
 				}
+				// ensure we always generate at least the desired amount of blank rooms
+				else deadEndsGenerated--;	
 			}
 		}
 	}
@@ -201,27 +200,8 @@ public class LevelGeneration : MonoBehaviour
 		}
 		else left = false;
 
-		if(deadEnd)
-		{
-			// if dead end, then pick from appropriate room types at random
-			if (up) acceptableTypes.Add(Room.Type.U);
-			if (down) acceptableTypes.Add(Room.Type.D);
-			if (right) acceptableTypes.Add(Room.Type.R);
-			if (left) acceptableTypes.Add(Room.Type.L);
-
-			if (acceptableTypes.Count > 0)
-			{
-				return acceptableTypes[Random.Range(0, acceptableTypes.Count)];
-			}
-			// if all false, pick blank room
-			else return Room.Type.Blank;
-		}
-		else
-		{
-			// select and return appropriate Room.Type
-			return SelectRoomType(up, down, left, right);
-		}
-
+		// select and return appropriate Room.Type
+		return SelectRoomType(up, down, left, right);
 	}
 
 	private Room.Type SelectRoomType(bool up, bool down, bool left, bool right)
@@ -298,14 +278,6 @@ public class LevelGeneration : MonoBehaviour
         castleMap[gridX, gridY].roomType = roomType;
 	}
 
-	private void InitializeRoom(int gridX, int gridY, Room.Type roomType, bool isDeadEnd)
-	{
-		castleMap[gridX, gridY] = new GameObject().AddComponent<Room>();
-		castleMap[gridX, gridY].roomPalette = roomArchetype.roomPalette;
-		castleMap[gridX, gridY].roomType = roomType;
-		castleMap[gridX, gridY].isDeadEnd = isDeadEnd;
-	}
-
 	private void ChangeRoomType(int gridX, int gridY, Room.Type roomType) { castleMap[gridX, gridY].roomType = roomType; }
 
     private void GenerateRoom(int gridX, int gridY)
@@ -321,4 +293,14 @@ public class LevelGeneration : MonoBehaviour
         if (castleMap[gridX, gridY]) return castleMap[gridX, gridY];
         else return null;
     }
+
+	private void SetPoligonColliderBounds()
+	{
+		polyCollider.points = new Vector2[] {
+			new Vector2Int(0-(roomWidth/2), 0-(roomHeight/2)),	// bottom left
+			new Vector2Int(0-(roomWidth/2), (roomHeight * levelHeightInRooms) - (roomHeight/2)),	// top left
+			new Vector2Int((roomWidth * levelWidthInRooms) - (roomWidth/2), (roomHeight * levelHeightInRooms) - (roomHeight/2)),   // top right
+			new Vector2Int((roomWidth * levelWidthInRooms) - (roomWidth/2), 0-(roomHeight/2))	// bottom right
+		};
+	}
 }

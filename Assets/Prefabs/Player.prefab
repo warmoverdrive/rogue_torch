@@ -56,11 +56,11 @@ MonoBehaviour:
   m_LightOrder: 1
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0.523
-  m_ShadowVolumeIntensity: 0.268
+  m_ShadowVolumeIntensity: 1
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.65
-  m_PointLightOuterRadius: 8.37
+  m_PointLightInnerRadius: 1
+  m_PointLightOuterRadius: 8
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -120,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4177553798107535068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7999997, z: -10}
+  m_LocalPosition: {x: 0, y: 3.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4177553798927339679}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Follow: {fileID: 4177553798938464260}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 4.5
+    OrthographicSize: 9
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -539,4 +539,4 @@ MonoBehaviour:
   - {x: -0.41299486, y: 0.22592306, z: 0}
   m_ShapePathHash: 654946053
   m_Mesh: {fileID: 0}
-  m_InstanceId: 34640
+  m_InstanceId: 26270

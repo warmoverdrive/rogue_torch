@@ -9,8 +9,6 @@ public class Room : MonoBehaviour
     [SerializeField]
     public Type roomType;
 
-    public bool isDeadEnd = false;
-
     private GameObject roomToSpawn;
 
     public enum Type
@@ -35,7 +33,13 @@ public class Room : MonoBehaviour
         Blank
     }
 
-    public void CreateRoom(int xSpawnPos, int ySpawnPos, Transform parent)
+	private void Start()
+	{
+        //check if this is attached to a Grid parent, if not, delete (garbage collection)
+        if (!GetComponentInParent<Grid>()) Destroy(gameObject);
+	}
+
+	public void CreateRoom(int xSpawnPos, int ySpawnPos, Transform parent)
     {
         switch (roomType)
         {
