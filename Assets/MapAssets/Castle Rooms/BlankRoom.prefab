@@ -53,17 +53,13 @@ MonoBehaviour:
   m_SelfShadows: 1
   m_ApplyToSortingLayers: cf4c443000000000
   m_ShapePath:
-  - {x: 6, y: -3, z: 0}
-  - {x: 16, y: -3, z: 0}
+  - {x: 16, y: -9, z: 0}
   - {x: 16, y: 9, z: 0}
-  - {x: 2, y: 9, z: 0}
-  - {x: 2, y: -5, z: 0}
-  - {x: 5, y: -5, z: 0}
-  - {x: 5, y: -4, z: 0}
-  - {x: 6, y: -4, z: 0}
-  m_ShapePathHash: -98471579
+  - {x: -16, y: 9, z: 0}
+  - {x: -16, y: -9, z: 0}
+  m_ShapePathHash: 605418773
   m_Mesh: {fileID: 0}
-  m_InstanceId: -251844
+  m_InstanceId: -552936
 --- !u!114 &6411295660028063032
 MonoBehaviour:
   m_ObjectHideFlags: 0
