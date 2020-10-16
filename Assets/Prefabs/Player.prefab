@@ -26,11 +26,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4177553797838195504}
   m_LocalRotation: {x: -0, y: -0, z: 0.0025549592, w: 0.9999967}
-  m_LocalPosition: {x: 0.31, y: 0.66, z: 0}
+  m_LocalPosition: {x: 0.30999994, y: 0.65999985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4177553798938464260}
-  m_RootOrder: 1
+  m_Father: {fileID: 4177553798680034887}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4177553797838195519
 MonoBehaviour:
@@ -125,7 +125,7 @@ Transform:
   m_Children:
   - {fileID: 4177553798927339679}
   m_Father: {fileID: 4177553798938464260}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4177553798107535069
 MonoBehaviour:
@@ -207,7 +207,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4177553797838195505}
   m_Father: {fileID: 4177553798938464260}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -407,7 +408,7 @@ GameObject:
   - component: {fileID: 4177553798938464258}
   - component: {fileID: 4177553798938464261}
   - component: {fileID: 4177553798938464256}
-  - component: {fileID: 4177553798938464257}
+  - component: {fileID: 4457463254166267912}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -427,7 +428,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4177553798680034887}
-  - {fileID: 4177553797838195505}
   - {fileID: 4177553798107535066}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -510,7 +510,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45231676, y: 0.15668535}
   m_EdgeRadius: 0
---- !u!114 &4177553798938464257
+--- !u!114 &4457463254166267912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,4 +539,4 @@ MonoBehaviour:
   - {x: -0.41299486, y: 0.22592306, z: 0}
   m_ShapePathHash: 654946053
   m_Mesh: {fileID: 0}
-  m_InstanceId: 26270
+  m_InstanceId: 35180
