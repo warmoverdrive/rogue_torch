@@ -57,7 +57,6 @@ public class LevelGeneration : MonoBehaviour
 			Debug.Log("Dead end: " + deadEnd);
 		}
 
-
 		//Construct Pathfinder object (local scope to destroy after completion of Awake())
 		Pathfinder pathfinder = new Pathfinder(castleMap, startingRoom, endingRoom, deadEndGrids);
 		path = pathfinder.CalculatePath();

@@ -12,20 +12,29 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     float dropSpeed = 1f;
 
+    // Internal Component References
+    PlayerStatusController statusController;
+    Animator animator;
     Rigidbody2D rb;
+
+    // status variables
     bool facingRight = true;
     bool isJumping = false;
     bool canDrop = false;
     bool isDropping = false;
+    public bool isTakingAction = false;
 
+    // Data variables
+    int groundLayer;
+    int platformLayer;
     Vector2 rightFaceScale = new Vector2(1, 1);
     Vector2 leftFaceScale = new Vector2(-1, 1);
 
-    int groundLayer;
-    int platformLayer;
 
     void Start()
     {
+        statusController = GetComponent<PlayerStatusController>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundLayer = LayerMask.NameToLayer("Ground");
         platformLayer = LayerMask.NameToLayer("Platform");
@@ -33,15 +42,21 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetAxis("Horizontal") != 0 && !isDropping) Move();
-        Flip();
-        Jump();
-        if (!isDropping) Drop();
+        if(statusController.IsPlayerDead() == false && !isTakingAction)
+		{
+            if (Input.GetAxis("Horizontal") != 0 && !isDropping) Move();
+            else animator.SetBool("isWalking", false);
+
+            Flip();
+            Jump();
+
+            if (!isDropping) Drop();
+		}
     }
 
     private void Drop()
     {
-        if (Input.GetAxis("Drop") != 0 && canDrop == true)
+        if (Input.GetButtonDown("Drop") && canDrop == true)
         {
             canDrop = false;
             StartCoroutine("DropMovement");
@@ -60,7 +75,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetAxis("Jump") > 0 && isJumping == false)
+        if (Input.GetButtonDown("Jump") && isJumping == false)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isJumping = true;
@@ -69,6 +84,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
+        animator.SetBool("isWalking", true);
+
         float deltaX = moveSpeed * Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(deltaX, rb.velocity.y);
 

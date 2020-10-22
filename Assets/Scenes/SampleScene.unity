@@ -235,8 +235,8 @@ MonoBehaviour:
     type: 3}
   roomWidth: 32
   roomHeight: 18
-  levelWidthInRooms: 8
-  levelHeightInRooms: 5
+  levelWidthInRooms: 3
+  levelHeightInRooms: 6
   numberOfDeadEnds: 8
 --- !u!60 &126305559
 PolygonCollider2D:
@@ -499,8 +499,9 @@ GameObject:
   - component: {fileID: 831732876}
   - component: {fileID: 831732878}
   - component: {fileID: 831732877}
+  - component: {fileID: 831732879}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TorchCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,6 +567,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831732875}
   m_CullTransparentMesh: 0
+--- !u!114 &831732879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831732875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e69348b1b9ffbf47806e4199ad6973f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1360960237
 GameObject:
   m_ObjectHideFlags: 0

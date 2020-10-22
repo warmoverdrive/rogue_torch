@@ -1,0 +1,52 @@
+TODO:
+	
+Enemy Knight Update:
+	* Create art for Knight
+	* Set up animations for Knight
+	* Set up logic for movement (edge + wall detection)
+	* Set up logic for spotting player (raycast in direction of movement)
+	* Set Room spawners for Enemys
+	
+Player Combat Update:
+	* Set up logic for Attack
+		> Cast shape/ray in facing direction
+		> Check for collisions with enemy
+		> Deal damage
+	* Set up logic for Block
+		> If hit and Blocking, deal no damage and force backward
+		> If hit and blocking, blocking ended
+		
+Enemy AI Update:
+	* Set up Knight AI for Attack and Block
+		> Check if in action on frame, if not then perform action check
+		> If within attack range, chance to attack, block, or do nothing
+			> 50% attack, 30% block, 20% do nothing
+		> Block for x seconds coroutine
+		> Attack and wait x seconds coroutine
+		
+Menu + Seed Update:
+	* Set up Main Menu
+	* Set up seed entry box
+	* Set up way of passing random seed to all objects (research how Random Seed works in Unity)
+	* Set up Score Screen that can return to main menu
+		
+Exit Update:
+	* Have an escape room with a seperate camera volume
+	* Send to Score Screen on trigger with an "exit"
+	
+Rooms Update:
+	* Create environment asset art:
+		> Background windows
+		> Furniture
+		> Objects of interest
+		> "Doors"
+	* Create at least 3 of each type room for generation
+	
+Minimum Viable Product Reached...
+
+STRETCH UPDATES:
+
+	* Archer Update
+	* Bosses Update
+	* Gold Update
+	* Post-Process/VFX Update

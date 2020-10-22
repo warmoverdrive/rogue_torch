@@ -26,11 +26,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4177553797838195504}
   m_LocalRotation: {x: -0, y: -0, z: 0.0025549592, w: 0.9999967}
-  m_LocalPosition: {x: 0.31, y: 0.66, z: 0}
+  m_LocalPosition: {x: 0.30999994, y: 0.65999985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4177553798938464260}
-  m_RootOrder: 1
+  m_Father: {fileID: 4177553798680034887}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4177553797838195519
 MonoBehaviour:
@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 4177553798107535066}
   - component: {fileID: 4177553798107535069}
   - component: {fileID: 4177553798107535067}
+  - component: {fileID: 39804916187910795}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -125,7 +126,7 @@ Transform:
   m_Children:
   - {fileID: 4177553798927339679}
   m_Father: {fileID: 4177553798938464260}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4177553798107535069
 MonoBehaviour:
@@ -179,6 +180,18 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &39804916187910795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177553798107535068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc8d42f3dadcdd4992797319dacad67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4177553798680034886
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +220,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4177553797838195505}
   m_Father: {fileID: 4177553798938464260}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -403,11 +417,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4177553798938464260}
+  - component: {fileID: 4610394084221218700}
   - component: {fileID: 4177553798938464259}
+  - component: {fileID: 2816325962911619315}
   - component: {fileID: 4177553798938464258}
   - component: {fileID: 4177553798938464261}
   - component: {fileID: 4177553798938464256}
-  - component: {fileID: 4177553798938464257}
+  - component: {fileID: 4457463254166267912}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -427,11 +443,35 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4177553798680034887}
-  - {fileID: 4177553797838195505}
   - {fileID: 4177553798107535066}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4610394084221218700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177553798938464263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05716a5f1e138ae4d9a4fec7b6626087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 1
+  hitPointsPerTorch: 1
+  timeBeforeRespawn: 3
+  torchOuterRadiusStart: 8
+  torchInnerRadiusStart: 1
+  torchOuterRadiusMax: 16
+  torchOuterSizeIncrement: 1
+  torchInnerSizeIncriment: 0.25
+  FXStartIntensity: 1.5
+  FXIntensityIncrement: 0.25
+  playerSprite: {fileID: 4177553798680034886}
+  torchDropPrefab: {fileID: 4177553798938464263, guid: 98119170dc5fee342ad5f2b3fa4241b7,
+    type: 3}
 --- !u!114 &4177553798938464259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +487,18 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 21
   dropSpeed: 10
+--- !u!114 &2816325962911619315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177553798938464263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e488ca0a95a8b14fa798be10a801d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &4177553798938464258
 Rigidbody2D:
   serializedVersion: 4
@@ -510,7 +562,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45231676, y: 0.15668535}
   m_EdgeRadius: 0
---- !u!114 &4177553798938464257
+--- !u!114 &4457463254166267912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,4 +591,4 @@ MonoBehaviour:
   - {x: -0.41299486, y: 0.22592306, z: 0}
   m_ShapePathHash: 654946053
   m_Mesh: {fileID: 0}
-  m_InstanceId: 26270
+  m_InstanceId: 41702

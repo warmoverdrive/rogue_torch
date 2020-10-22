@@ -9,7 +9,7 @@ public class TorchFX : MonoBehaviour
     [SerializeField]
     float minRandomLightIntensity = 0f;
     [SerializeField]
-    float maxRandomLightIntensity = 1f;
+    public float maxRandomLightIntensity = 1f;
     [SerializeField]
     Color[] randomColors;
     [SerializeField]
