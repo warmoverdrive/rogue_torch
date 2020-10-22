@@ -22,12 +22,14 @@ public class PlayerMovementController : MonoBehaviour
     bool isJumping = false;
     bool canDrop = false;
     bool isDropping = false;
+    public bool isTakingAction = false;
 
     // Data variables
     int groundLayer;
     int platformLayer;
     Vector2 rightFaceScale = new Vector2(1, 1);
     Vector2 leftFaceScale = new Vector2(-1, 1);
+
 
     void Start()
     {
@@ -40,7 +42,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(statusController.IsPlayerDead() == false)
+        if(statusController.IsPlayerDead() == false && !isTakingAction)
 		{
             if (Input.GetAxis("Horizontal") != 0 && !isDropping) Move();
             else animator.SetBool("isWalking", false);
@@ -54,7 +56,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Drop()
     {
-        if (Input.GetAxis("Drop") != 0 && canDrop == true)
+        if (Input.GetButtonDown("Drop") && canDrop == true)
         {
             canDrop = false;
             StartCoroutine("DropMovement");
@@ -73,7 +75,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetAxis("Jump") > 0 && isJumping == false)
+        if (Input.GetButtonDown("Jump") && isJumping == false)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isJumping = true;

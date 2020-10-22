@@ -1,9 +1,4 @@
 TODO:
-
-Player Animations Update:
-	* Set up PlayerActions.cs
-	* Get input for Attack and Block
-	* Tie in animations
 	
 Enemy Knight Update:
 	* Create art for Knight

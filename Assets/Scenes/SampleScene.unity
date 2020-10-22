@@ -235,9 +235,9 @@ MonoBehaviour:
     type: 3}
   roomWidth: 32
   roomHeight: 18
-  levelWidthInRooms: 6
+  levelWidthInRooms: 3
   levelHeightInRooms: 6
-  numberOfDeadEnds: 12
+  numberOfDeadEnds: 8
 --- !u!60 &126305559
 PolygonCollider2D:
   m_ObjectHideFlags: 0
