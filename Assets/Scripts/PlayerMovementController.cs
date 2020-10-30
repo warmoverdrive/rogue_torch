@@ -19,8 +19,8 @@ public class PlayerMovementController : MonoBehaviour
 
     // status variables
     bool facingRight = true;
-    bool isJumping = false;
-    bool canDrop = false;
+    public bool isJumping = false;
+    public bool canDrop = false;
     bool isDropping = false;
     public bool isTakingAction = false;
 
@@ -40,7 +40,7 @@ public class PlayerMovementController : MonoBehaviour
         platformLayer = LayerMask.NameToLayer("Platform");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(statusController.IsPlayerDead() == false && !isTakingAction)
 		{
