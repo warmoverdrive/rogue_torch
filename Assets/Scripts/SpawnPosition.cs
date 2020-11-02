@@ -5,11 +5,31 @@ using UnityEngine;
 public class SpawnPosition : MonoBehaviour
 {
     [SerializeField]
-    GameObject player;
+    ActorPalette actorPalette;
+
+    [SerializeField]
+    SpawnType actorToSpawn;
+
+    public enum SpawnType
+	{ 
+        Player,
+        MeleeEnemy
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(player, transform.position, Quaternion.identity);
+		switch (actorToSpawn)
+        {
+            case SpawnType.Player:
+                Instantiate(actorPalette.player, transform.position, Quaternion.identity);
+                break;
+
+            case SpawnType.MeleeEnemy:
+                Instantiate(actorPalette.meleeEnemy, transform.position, Quaternion.identity);
+                break;
+		}
+
+        
     }
 }
