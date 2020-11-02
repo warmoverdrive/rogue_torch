@@ -18,18 +18,26 @@ public class SpawnPosition : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+	{
+		SpawnActor();
+	}
+
+	private void SpawnActor()
+	{
 		switch (actorToSpawn)
-        {
-            case SpawnType.Player:
-                Instantiate(actorPalette.player, transform.position, Quaternion.identity);
-                break;
+		{
+			case SpawnType.Player:
+				Instantiate(actorPalette.player, transform.position, Quaternion.identity, gameObject.transform);
+				break;
 
-            case SpawnType.MeleeEnemy:
-                Instantiate(actorPalette.meleeEnemy, transform.position, Quaternion.identity);
-                break;
+			case SpawnType.MeleeEnemy:
+				Instantiate(actorPalette.meleeEnemy, transform.position, Quaternion.identity, gameObject.transform);
+				break;
 		}
+	}
 
-        
-    }
+	public void SpawnReset()
+	{
+		SpawnActor();
+	}
 }
