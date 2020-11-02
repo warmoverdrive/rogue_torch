@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3134102564468202895}
   - component: {fileID: 2648457546169454471}
   - component: {fileID: 4475934159507457870}
-  - component: {fileID: 6944814005543181367}
   - component: {fileID: 1250570893421867132}
+  - component: {fileID: 708292187}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -72,32 +72,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.046097457, y: 0.27914584}
   m_Size: {x: 0.6126827, y: 1.3226826}
   m_Direction: 0
---- !u!61 &6944814005543181367
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2172511282971781794}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.41743824, y: -0.16134119}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.2060991, y: 0.28805065}
-  m_EdgeRadius: 0
 --- !u!61 &1250570893421867132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,6 +98,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.21634302, y: 0.2675624}
   m_EdgeRadius: 0
+--- !u!114 &708292187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172511282971781794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1432665c411194baaed9708af79c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1.75
 --- !u!1 &3121033287060159202
 GameObject:
   m_ObjectHideFlags: 0
