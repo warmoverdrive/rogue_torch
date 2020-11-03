@@ -1,8 +1,5 @@
 TODO:
 	
-Enemy Knight Update:
-	* Set up logic for spotting player (raycast in direction of movement)
-	
 Player Combat Update:
 	* Set up logic for Attack
 		> Cast shape/ray in facing direction
