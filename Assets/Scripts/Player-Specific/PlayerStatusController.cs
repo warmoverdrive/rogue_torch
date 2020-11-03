@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using Cinemachine;
 
-public class PlayerStatusController : MonoBehaviour
+public class PlayerStatusController : MonoBehaviour, IDamagable
 {
 	[Header("Design Levers")]
 	[SerializeField]
@@ -45,7 +45,7 @@ public class PlayerStatusController : MonoBehaviour
 		torchCounter.SetText(hitPoints);
 	}
 
-	public void PlayerHit(int damage)
+	public void Hit(int damage)
 	{
 		if (hitPoints - damage <= 0)
 		{
@@ -99,5 +99,5 @@ public class PlayerStatusController : MonoBehaviour
 		else extraTorchHits--;
 	}
 
-	public bool IsPlayerDead() { return isDead; }
+	public bool IsDead() { return isDead; }
 }

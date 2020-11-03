@@ -1,10 +1,6 @@
 TODO:
 	
 Player Combat Update:
-	* Set up logic for Attack
-		> Cast shape/ray in facing direction
-		> Check for collisions with enemy
-		> Deal damage
 	* Set up logic for Block
 		> If hit and Blocking, deal no damage and force backward
 		> If hit and blocking, blocking ended

@@ -12,12 +12,14 @@ public class PlayerAction : MonoBehaviour
 
     Animator animator;
     PlayerMovementController movementController;
+    IAttack attackAction;
     
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         movementController = GetComponent<PlayerMovementController>();
+        attackAction = GetComponent<IAttack>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class PlayerAction : MonoBehaviour
         isAttacking = true;
         movementController.isTakingAction = true;
         animator.SetTrigger("attack");
+        attackAction.Attack(movementController.FacingRight());
 
         yield return new WaitForSeconds(attackTime);
 

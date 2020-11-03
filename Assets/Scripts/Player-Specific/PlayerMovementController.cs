@@ -42,7 +42,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        if(statusController.IsPlayerDead() == false && !isTakingAction)
+        if(statusController.IsDead() == false && !isTakingAction)
 		{
             if (Input.GetAxis("Horizontal") != 0 && !isDropping) Move();
             else animator.SetBool("isWalking", false);
@@ -98,6 +98,8 @@ public class PlayerMovementController : MonoBehaviour
         if (facingRight) transform.localScale = rightFaceScale;
         else transform.localScale = leftFaceScale;
     }
+
+    public bool FacingRight() => facingRight;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
