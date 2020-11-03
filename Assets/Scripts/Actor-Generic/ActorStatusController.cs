@@ -8,11 +8,16 @@ public class ActorStatusController : MonoBehaviour, IDamagable
 	int hitPoints = 1;
 
 	bool isDead = false;
+	public bool isBlocking = false;
 
 	public void Hit(int damage) 
 	{
-		hitPoints -= damage;
-		if (hitPoints <= 0) isDead = true;
+		if (isBlocking) return;
+		else
+		{
+			hitPoints -= damage;
+			if (hitPoints <= 0) isDead = true;
+		}
 	}
 
 	public bool IsDead() { return isDead; }

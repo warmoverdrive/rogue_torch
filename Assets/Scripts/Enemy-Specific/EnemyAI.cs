@@ -13,14 +13,24 @@ public class EnemyAI : MonoBehaviour
     Vector3 castOffset = Vector2.right/2;
 	[SerializeField]
 	float attackWindUp = 0.25f,
-		attackCoolDown = 0.25f;
+		attackCoolDown = 0.25f,
+		blockTime = 1f;
+	[Header("Action Properties")]
+	[SerializeField]
+	bool canBlock = true;
+	[SerializeField]
+	int attackChance = 50,
+		blockChance = 30,
+		idleChance = 20;
+
+	int ratioTotal;
 
     public bool playerSighted { get; private set; } = false;
 	public bool isPerformingAction { get; private set; } = false;
 
     EnemyMovement enemyMovement;
 	Animator animator;
-    IDamagable statusController;
+    ActorStatusController statusController;
     Vector2 sightDirection = Vector2.right;
     int PLAYER_MASK;
 	GameObject target;
@@ -30,7 +40,7 @@ public class EnemyAI : MonoBehaviour
 	void Start()
     {
 		animator = GetComponentInChildren<Animator>();
-        statusController = GetComponent<IDamagable>();
+        statusController = GetComponent<ActorStatusController>();
         PLAYER_MASK = LayerMask.GetMask("Player");
         enemyMovement = GetComponent<EnemyMovement>();
 		attack = GetComponent<IAttack>();
@@ -60,16 +70,30 @@ public class EnemyAI : MonoBehaviour
 
 	void ChooseAction()
 	{
-		if (!isPerformingAction)
+		if (!isPerformingAction && InAttackRange())
 		{
-			if (Random.Range(0,25) == 0)
-			{
-				if (InAttackRange())
-				{
-					StartCoroutine(AttackAction());
-				}
-			}
+			ratioTotal = attackChance + blockChance + idleChance;
+
+			int randResult = Random.Range(0, ratioTotal);
+			if ((randResult -= attackChance) < 0)
+				StartCoroutine(AttackAction());
+			else if (canBlock && (randResult -= blockChance) < 0)
+				StartCoroutine(BlockingAction());
+			else return;
 		}
+	}
+
+	IEnumerator BlockingAction()
+	{
+		isPerformingAction = true;
+		statusController.isBlocking = true;
+		animator.SetBool("isBlocking", true);
+
+		yield return new WaitForSeconds(blockTime);
+
+		isPerformingAction = false;
+		statusController.isBlocking = false;
+		animator.SetBool("isBlocking", false);
 	}
 
 	IEnumerator AttackAction()

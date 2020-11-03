@@ -106,8 +106,10 @@ MonoBehaviour:
   sightDistance: 8
   sightCircleRadius: 2
   castOffset: {x: 0.5, y: 0, z: 0}
+  canBlock: 1
   attackWindUp: 0.25
   attackCoolDown: 0.25
+  blockTime: 2.5
 --- !u!114 &4062368735841307961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 2
+  isBlocking: 0
 --- !u!114 &8918854156290457803
 MonoBehaviour:
   m_ObjectHideFlags: 0
