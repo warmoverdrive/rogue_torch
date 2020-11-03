@@ -8,7 +8,7 @@ public class PlayerAction : MonoBehaviour
     float attackTime = 0.25f;
 
     bool isAttacking = false;
-    bool isBlocking = false;
+    public bool isBlocking { get; private set; } = false;
 
     Animator animator;
     PlayerMovementController movementController;
@@ -27,13 +27,12 @@ public class PlayerAction : MonoBehaviour
     {
         if (Input.GetButtonDown("Attack") && !isBlocking)
 		{
-            //Attack
             StartCoroutine(Attack());
 		}
 
         if (Input.GetButton("Block") && !isAttacking)
         {
-            //block
+            isBlocking = true;
             movementController.isTakingAction = true;
             animator.SetBool("isBlocking", true);
         }

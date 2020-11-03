@@ -28,9 +28,9 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
 	{
-        if (!statusController.IsDead())
+        if (!statusController.IsDead() && !enemyAI.isPerformingAction)
             Move();
-        else rb.simulated = false;
+        else if (statusController.IsDead()) rb.simulated = false;
 	}
 
 	private void Move()

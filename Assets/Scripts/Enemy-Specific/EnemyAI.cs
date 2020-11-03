@@ -11,33 +11,78 @@ public class EnemyAI : MonoBehaviour
     float sightCircleRadius = 2;
     [SerializeField]
     Vector3 castOffset = Vector2.right/2;
+	[SerializeField]
+	float attackWindUp = 0.25f,
+		attackCoolDown = 0.25f;
 
     public bool playerSighted { get; private set; } = false;
+	public bool isPerformingAction { get; private set; } = false;
 
     EnemyMovement enemyMovement;
 	Animator animator;
     IDamagable statusController;
     Vector2 sightDirection = Vector2.right;
     int PLAYER_MASK;
+	GameObject target;
+	IAttack attack;
 
-    void Start()
+
+	void Start()
     {
 		animator = GetComponentInChildren<Animator>();
         statusController = GetComponent<IDamagable>();
         PLAYER_MASK = LayerMask.GetMask("Player");
         enemyMovement = GetComponent<EnemyMovement>();
+		attack = GetComponent<IAttack>();
     }
 
     void FixedUpdate()
 	{
 		if (!statusController.IsDead())
+		{
 			SearchForPlayer();
+			if (target) ChooseAction();
+		}
+		else if (statusController.IsDead()) StopAllCoroutines();
 	}
 
 	private void Update()
 	{
 		if (animator.GetBool("isDead")) return;
 		else if (statusController.IsDead()) animator.SetBool("isDead", true);
+	}
+
+	public bool InAttackRange()
+	{
+		var distance = Vector3.Distance(transform.position, target.transform.position);
+		return distance <= attack.GetAttackRange();
+	}
+
+	void ChooseAction()
+	{
+		if (!isPerformingAction)
+		{
+			if (Random.Range(0,25) == 0)
+			{
+				if (InAttackRange())
+				{
+					StartCoroutine(AttackAction());
+				}
+			}
+		}
+	}
+
+	IEnumerator AttackAction()
+	{
+		isPerformingAction = true;
+		yield return new WaitForSeconds(attackWindUp);
+
+		animator.SetTrigger("attack");
+		attack.Attack(enemyMovement.isFacingRight);
+
+		yield return new WaitForSeconds(attackCoolDown);
+
+		isPerformingAction = false;
 	}
 
 	private void SearchForPlayer()
@@ -49,14 +94,18 @@ public class EnemyAI : MonoBehaviour
 		{
 			playerSighted = true;
 
-			var player = sightCast.collider.gameObject;
+			target = sightCast.collider.gameObject;
 
-			var direction = transform.position - player.transform.position;
+			var direction = transform.position - target.transform.position;
 
 			if (direction.x < 0) enemyMovement.FacePlayer(true);
 			else enemyMovement.FacePlayer(false);
 		}
-		else playerSighted = false;
+		else
+		{
+			playerSighted = false;
+			target = null;
+		}
 	}
 
 	public void Flip()

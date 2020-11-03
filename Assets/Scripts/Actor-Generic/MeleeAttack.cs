@@ -29,4 +29,6 @@ public class MeleeAttack : MonoBehaviour, IAttack
 			}
 		}
 	}
+
+	public float GetAttackRange() => attackRange;
 }

@@ -967,6 +967,11 @@ PrefabInstance:
       propertyPath: m_InstanceId
       value: -180566
       objectReference: {fileID: 0}
+    - target: {fileID: 4610394084221218700, guid: b5a905ccbfb60a64e968fa47874c25e4,
+        type: 3}
+      propertyPath: hitPoints
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4728680789862461574, guid: b5a905ccbfb60a64e968fa47874c25e4,
         type: 3}
       propertyPath: attackRange

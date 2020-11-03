@@ -1,12 +1,7 @@
 TODO:
-	
-Player Combat Update:
-	* Set up logic for Block
-		> If hit and Blocking, deal no damage and force backward
-		> If hit and blocking, blocking ended
 		
 Enemy AI Update:
-	* Set up Knight AI for Attack and Block
+	* Set up Knight AI for Attack & Block
 		> Check if in action on frame, if not then perform action check
 		> If within attack range, chance to attack, block, or do nothing
 			> 50% attack, 30% block, 20% do nothing
