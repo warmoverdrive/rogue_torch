@@ -8,16 +8,18 @@ public class PlayerAction : MonoBehaviour
     float attackTime = 0.25f;
 
     bool isAttacking = false;
-    bool isBlocking = false;
+    public bool isBlocking { get; private set; } = false;
 
     Animator animator;
     PlayerMovementController movementController;
+    IAttack attackAction;
     
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         movementController = GetComponent<PlayerMovementController>();
+        attackAction = GetComponent<IAttack>();
     }
 
     // Update is called once per frame
@@ -25,13 +27,12 @@ public class PlayerAction : MonoBehaviour
     {
         if (Input.GetButtonDown("Attack") && !isBlocking)
 		{
-            //Attack
             StartCoroutine(Attack());
 		}
 
         if (Input.GetButton("Block") && !isAttacking)
         {
-            //block
+            isBlocking = true;
             movementController.isTakingAction = true;
             animator.SetBool("isBlocking", true);
         }
@@ -49,6 +50,7 @@ public class PlayerAction : MonoBehaviour
         isAttacking = true;
         movementController.isTakingAction = true;
         animator.SetTrigger("attack");
+        attackAction.Attack(movementController.FacingRight());
 
         yield return new WaitForSeconds(attackTime);
 

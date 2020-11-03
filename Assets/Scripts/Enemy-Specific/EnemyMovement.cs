@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     public float rayOffset = 0.25f;
     public bool isFacingRight { get; private set; } = true;
 
+    IDamagable statusController;
 	Rigidbody2D rb;
     EnemyAI enemyAI;
 
@@ -22,31 +23,39 @@ public class EnemyMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         enemyAI = GetComponent<EnemyAI>();
+        statusController = GetComponent<IDamagable>();
     }
 
     void FixedUpdate()
-    {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+	{
+        if (!statusController.IsDead() && !enemyAI.isPerformingAction)
+            Move();
+        else if (statusController.IsDead()) rb.simulated = false;
+	}
 
-        if (!enemyAI.playerSighted)
+	private void Move()
+	{
+		rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+
+		if (!enemyAI.playerSighted)
 		{
-            Vector2 raycastOrigin = new Vector2(transform.position.x + rayOffset, transform.position.y);
+			Vector2 raycastOrigin = new Vector2(transform.position.x + rayOffset, transform.position.y);
 
-            RaycastHit2D wallRay = Physics2D.Raycast(raycastOrigin, rayDirection, wallRayDistance);
-            RaycastHit2D floorRay = Physics2D.Raycast(raycastOrigin, rayDirection + Vector2.down, floorRayDistance);
+			RaycastHit2D wallRay = Physics2D.Raycast(raycastOrigin, rayDirection, wallRayDistance);
+			RaycastHit2D floorRay = Physics2D.Raycast(raycastOrigin, rayDirection + Vector2.down, floorRayDistance);
 
-            bool wallRayHitObject = wallRay.collider;
-        
-            if (wallRayHitObject || floorRay.collider == null)
-		    {
-                if (wallRayHitObject && 
-                    wallRay.collider.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
-                else if (rb.velocity.y >= -.25f) Flip(); // stops flipping if falling, which just looks goofy af
-		    }
+			bool wallRayHitObject = wallRay.collider;
+
+			if (wallRayHitObject || floorRay.collider == null)
+			{
+				if (wallRayHitObject &&
+					wallRay.collider.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
+				else if (rb.velocity.y >= -.25f) Flip(); // stops flipping if falling, which just looks goofy af
+			}
 		}
-    }
+	}
 
-    private void Flip()
+	private void Flip()
 	{
         transform.localScale = new Vector3(-transform.localScale.x, 1, 0);
         moveSpeed = -moveSpeed;

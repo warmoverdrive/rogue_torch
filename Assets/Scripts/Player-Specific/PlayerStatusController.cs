@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using Cinemachine;
 
-public class PlayerStatusController : MonoBehaviour
+public class PlayerStatusController : MonoBehaviour, IDamagable
 {
 	[Header("Design Levers")]
 	[SerializeField]
@@ -35,28 +35,34 @@ public class PlayerStatusController : MonoBehaviour
 	Light2D playerTorch;
 	TorchFX torchFX;
 	GameController gameController;
+	PlayerAction action;
 
 	private void Start()
 	{
 		playerTorch = GetComponentInChildren<Light2D>();
 		torchFX = GetComponentInChildren<TorchFX>();
+		action = GetComponent<PlayerAction>();
 		torchCounter = FindObjectOfType<TorchCounter>();
 		gameController = FindObjectOfType<GameController>();
 		torchCounter.SetText(hitPoints);
 	}
 
-	public void PlayerHit(int damage)
+	public void Hit(int damage)
 	{
-		if (hitPoints - damage <= 0)
-		{
-			torchCounter.SetText(0);
-			PlayerDeath();
-		}
+		if (action.isBlocking) return;
 		else
 		{
-			hitPoints -= damage;
-			IncrementTorchNegative();
-			torchCounter.SetText(hitPoints);
+			if (hitPoints - damage <= 0)
+			{
+				torchCounter.SetText(0);
+				PlayerDeath();
+			}
+			else
+			{
+				hitPoints -= damage;
+				IncrementTorchNegative();
+				torchCounter.SetText(hitPoints);
+			}
 		}
 	}
 
@@ -99,5 +105,5 @@ public class PlayerStatusController : MonoBehaviour
 		else extraTorchHits--;
 	}
 
-	public bool IsPlayerDead() { return isDead; }
+	public bool IsDead() { return isDead; }
 }
