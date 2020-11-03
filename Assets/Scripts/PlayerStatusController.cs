@@ -34,20 +34,14 @@ public class PlayerStatusController : MonoBehaviour
 	TorchCounter torchCounter;
 	Light2D playerTorch;
 	TorchFX torchFX;
-	ShadowCaster2D shawdowCaster;
-
-	Vector3 spawnPos;
-
-	List<TorchMarker> torches = new List<TorchMarker>();
+	GameController gameController;
 
 	private void Start()
 	{
-		spawnPos = transform.position;
 		playerTorch = GetComponentInChildren<Light2D>();
 		torchFX = GetComponentInChildren<TorchFX>();
-		shawdowCaster = GetComponent<ShadowCaster2D>();
 		torchCounter = FindObjectOfType<TorchCounter>();
-
+		gameController = FindObjectOfType<GameController>();
 		torchCounter.SetText(hitPoints);
 	}
 
@@ -56,7 +50,7 @@ public class PlayerStatusController : MonoBehaviour
 		if (hitPoints - damage <= 0)
 		{
 			torchCounter.SetText(0);
-			StartCoroutine(PlayerDeath());
+			PlayerDeath();
 		}
 		else
 		{
@@ -66,39 +60,14 @@ public class PlayerStatusController : MonoBehaviour
 		}
 	}
 
-	private IEnumerator PlayerDeath()
+	void PlayerDeath()
 	{
-		HidePlayer();
-		yield return new WaitForSeconds(timeBeforeRespawn);
-		ResetPlayer();
-		ResetTorches();
-		torchCounter.SetText(hitPoints);
-	}
+		StartCoroutine(gameController.ResetLevel());
 
-	private void HidePlayer()
-	{
-		isDead = true;
-		playerSprite.SetActive(false);
-		shawdowCaster.enabled = false;
-		var newTorch = Instantiate(torchDropPrefab, transform.position, Quaternion.identity);
-		torches.Add(newTorch.GetComponent<TorchMarker>());
-	}
+		var torch = Instantiate(torchDropPrefab, transform.position, Quaternion.identity);
+		gameController.GenerateTorch(torch.GetComponent<TorchMarker>());
 
-	private void ResetPlayer()
-	{
-		transform.position = spawnPos;
-		playerSprite.SetActive(true);
-		shawdowCaster.enabled = true;
-		ResetPlayerTorch();
-		isDead = false;
-	}
-
-	private void ResetTorches()
-	{
-		foreach (var torch in torches)
-		{
-			torch.ResetFlame();
-		}
+		Destroy(gameObject);
 	}
 
 	public void GetFlame()
@@ -128,13 +97,6 @@ public class PlayerStatusController : MonoBehaviour
 			torchFX.maxRandomLightIntensity -= FXIntensityIncrement;
 		}
 		else extraTorchHits--;
-	}
-
-	private void ResetPlayerTorch()
-	{
-		playerTorch.pointLightOuterRadius = torchOuterRadiusStart;
-		playerTorch.pointLightInnerRadius = torchInnerRadiusStart;
-		torchFX.maxRandomLightIntensity = FXStartIntensity;
 	}
 
 	public bool IsPlayerDead() { return isDead; }
