@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.75
-  wallRayDistance: 0.25
+  wallRayDistance: 0.5
   floorRayDistance: 1
   rayDirection: {x: 0.5, y: 0}
   rayOffset: 0.25
@@ -106,10 +106,13 @@ MonoBehaviour:
   sightDistance: 8
   sightCircleRadius: 2
   castOffset: {x: 0.5, y: 0, z: 0}
-  canBlock: 1
   attackWindUp: 0.25
   attackCoolDown: 0.25
   blockTime: 2.5
+  canBlock: 1
+  attackChance: 50
+  blockChance: 30
+  idleChance: 20
 --- !u!114 &4062368735841307961
 MonoBehaviour:
   m_ObjectHideFlags: 0

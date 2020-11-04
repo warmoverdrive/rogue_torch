@@ -18,9 +18,11 @@ public class EnemyMovement : MonoBehaviour
     IDamagable statusController;
 	Rigidbody2D rb;
     EnemyAI enemyAI;
+    int GROUND_LAYER_MASK;
 
 	void Start()
     {
+        GROUND_LAYER_MASK = LayerMask.NameToLayer("Ground");
         rb = GetComponent<Rigidbody2D>();
         enemyAI = GetComponent<EnemyAI>();
         statusController = GetComponent<IDamagable>();
@@ -37,12 +39,16 @@ public class EnemyMovement : MonoBehaviour
 	{
 		rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
+        Debug.Log(enemyAI.playerSighted);
+
 		if (!enemyAI.playerSighted)
 		{
 			Vector2 raycastOrigin = new Vector2(transform.position.x + rayOffset, transform.position.y);
 
-			RaycastHit2D wallRay = Physics2D.Raycast(raycastOrigin, rayDirection, wallRayDistance);
-			RaycastHit2D floorRay = Physics2D.Raycast(raycastOrigin, rayDirection + Vector2.down, floorRayDistance);
+			RaycastHit2D wallRay = Physics2D.Raycast(
+                raycastOrigin, rayDirection, wallRayDistance);
+			RaycastHit2D floorRay = Physics2D.Raycast(
+                raycastOrigin, rayDirection + Vector2.down, floorRayDistance);
 
 			bool wallRayHitObject = wallRay.collider;
 
