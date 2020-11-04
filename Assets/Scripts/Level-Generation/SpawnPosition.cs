@@ -16,7 +16,6 @@ public class SpawnPosition : MonoBehaviour
         MeleeEnemy
     }
 
-    // Start is called before the first frame update
     void Start()
 	{
 		SpawnActor();

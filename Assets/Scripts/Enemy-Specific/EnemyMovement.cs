@@ -18,11 +18,9 @@ public class EnemyMovement : MonoBehaviour
     IDamagable statusController;
 	Rigidbody2D rb;
     EnemyAI enemyAI;
-    int GROUND_LAYER_MASK;
 
 	void Start()
     {
-        GROUND_LAYER_MASK = LayerMask.NameToLayer("Ground");
         rb = GetComponent<Rigidbody2D>();
         enemyAI = GetComponent<EnemyAI>();
         statusController = GetComponent<IDamagable>();
@@ -38,8 +36,6 @@ public class EnemyMovement : MonoBehaviour
 	private void Move()
 	{
 		rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-
-        Debug.Log(enemyAI.playerSighted);
 
 		if (!enemyAI.playerSighted)
 		{

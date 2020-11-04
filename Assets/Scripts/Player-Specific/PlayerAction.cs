@@ -14,7 +14,6 @@ public class PlayerAction : MonoBehaviour
     PlayerMovementController movementController;
     IAttack attackAction;
     
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -22,7 +21,6 @@ public class PlayerAction : MonoBehaviour
         attackAction = GetComponent<IAttack>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Attack") && !isBlocking)

@@ -29,8 +29,6 @@ public class TorchFX : MonoBehaviour
     Queue<float> smoothingQueue;
     float lastSum = 0;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         smoothingQueue = new Queue<float>(flickerSmoothing);
@@ -40,7 +38,6 @@ public class TorchFX : MonoBehaviour
         thisLight.color = randomColors[Random.Range(0, randomColors.Length - 1)];
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!thisLight) return;
