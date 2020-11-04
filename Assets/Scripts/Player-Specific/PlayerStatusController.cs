@@ -12,8 +12,6 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 	[SerializeField]
 	int hitPointsPerTorch = 1;
 	[SerializeField]
-	int timeBeforeRespawn = 3;
-	[SerializeField]
 	float torchOuterRadiusStart = 8,
 		torchInnerRadiusStart = 1,
 		torchOuterRadiusMax = 16,
@@ -68,7 +66,7 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 
 	void PlayerDeath()
 	{
-		StartCoroutine(gameController.ResetLevel());
+		gameController.TriggerReset();
 
 		var torch = Instantiate(torchDropPrefab, transform.position, Quaternion.identity);
 		gameController.GenerateTorch(torch.GetComponent<TorchMarker>());

@@ -137,4 +137,6 @@ public class EnemyAI : MonoBehaviour
         sightDirection = -sightDirection;
         castOffset = -castOffset;
 	}
+
+	public void DestroySelf() => Destroy(gameObject);
 }

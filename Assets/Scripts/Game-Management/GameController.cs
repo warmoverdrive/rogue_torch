@@ -9,30 +9,55 @@ public class GameController : MonoBehaviour
 
     List<TorchMarker> torches = new List<TorchMarker>();
     public SpawnPosition[] spawnPositions;
-    // TODO add array of enemies
+    public List<EnemyAI> activeEnemies = new List<EnemyAI>();
 
     void Start()
     {
         spawnPositions = FindObjectsOfType<SpawnPosition>();
-        // TODO populate array of enemies as a function, first clearing the array
+        CollectActiveEnemies();
     }
+
+    void CollectActiveEnemies()
+	{
+        activeEnemies = new List<EnemyAI>();
+
+        foreach (EnemyAI enemy in FindObjectsOfType<EnemyAI>())
+		{
+            activeEnemies.Add(enemy);
+		}
+	}
 
     public void GenerateTorch(TorchMarker torchObject)
 	{
         torches.Add(torchObject);
+		torchObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = torches.Count;
     }
 
-    public IEnumerator ResetLevel()
-	{
-        yield return new WaitForSeconds(timeBeforeRespawn);
+    public void TriggerReset() => StartCoroutine(ResetLevelRoutine());
 
-        foreach (SpawnPosition spawnPos in spawnPositions)
+    IEnumerator ResetLevelRoutine()
+	{
+		yield return new WaitForSeconds(timeBeforeRespawn);
+		ResetLevel();
+	}
+
+	private void ResetLevel()
+	{
+		foreach (EnemyAI enemy in activeEnemies)
 		{
-            spawnPos.SpawnReset();
+			// Idk why this works but if I don't do a null check here the respawns break
+			if (enemy == null) continue;
+			enemy.DestroySelf();
 		}
-        foreach (TorchMarker torch in torches)
+		foreach (SpawnPosition spawnPos in spawnPositions)
 		{
-            torch.ResetFlame();
+			spawnPos.SpawnReset();
 		}
+		foreach (TorchMarker torch in torches)
+		{
+			torch.ResetFlame();
+		}
+
+		CollectActiveEnemies();
 	}
 }

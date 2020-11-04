@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4177553797838195505}
   - component: {fileID: 4177553797838195519}
   - component: {fileID: 4177553797838195518}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: PlayerTorch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4177553798680034887}
   - component: {fileID: 4177553798680034885}
   - component: {fileID: 4177553798680034884}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 3403464923988417775}
   - component: {fileID: 4177553798938464258}
   - component: {fileID: 4177553798938464256}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TorchMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,6 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOuterRadiusMax: 6
   lightOuterRadiusMin: 2
+  lightInnerRadiusMax: 1
+  lightInnerRadiusMin: 0.1
 --- !u!50 &4177553798938464258
 Rigidbody2D:
   serializedVersion: 4

@@ -40,15 +40,12 @@ public class Pathfinder
 
 		while (!cameFrom.ContainsKey(endingRoom))
 		{
-			Debug.LogWarning("No path found! Destroying random Dead End and trying again!");
 			queue.Clear();
 			cameFrom = new Dictionary<Vector2Int, Vector2Int>();
 
 			deadEndRooms.Remove(deadEndRooms[Random.Range(0, deadEndRooms.Count)]);
-			Debug.LogWarning("dead ends left: "+deadEndRooms.Count);
 			BreadthFirstSearch();
 		}
-		Debug.LogWarning("Path completed: " + cameFrom.ContainsKey(endingRoom));
 
 		CreatePath();
 
@@ -57,7 +54,6 @@ public class Pathfinder
 
 	private void BreadthFirstSearch()
 	{
-		Debug.Log("Running BFS");
 		Vector2Int secondRoom = startingRoom;
 		cameFrom.Add(secondRoom, startingRoom);
 

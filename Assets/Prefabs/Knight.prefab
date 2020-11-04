@@ -106,8 +106,8 @@ MonoBehaviour:
   sightDistance: 8
   sightCircleRadius: 2
   castOffset: {x: 0.5, y: 0, z: 0}
-  attackWindUp: 0.25
-  attackCoolDown: 0.25
+  attackWindUp: 0.5
+  attackCoolDown: 0.5
   blockTime: 2.5
   canBlock: 1
   attackChance: 50
