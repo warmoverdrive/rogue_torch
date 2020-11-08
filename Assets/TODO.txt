@@ -1,11 +1,5 @@
 TODO:
-				
-Menu + Seed Update:
-	* Set up Main Menu
-	* Set up seed entry box
-	* Set up way of passing random seed to all objects (research how Random Seed works in Unity)
-	* Set up Score Screen that can return to main menu
-		
+						
 Exit Update:
 	* Have an escape room with a seperate camera volume
 	* Send to Score Screen on trigger with an "exit"
