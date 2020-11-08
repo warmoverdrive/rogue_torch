@@ -16,6 +16,8 @@ public class MenuLogic : MonoBehaviour
 
 	public void QuitGame() => Application.Quit();
 
+	public void ReturnToMainMenu() => SceneController.LoadMainMenu();
+
 	private void ParseAndSetSeed()
 	{
 		string seedStr = seedField.text;

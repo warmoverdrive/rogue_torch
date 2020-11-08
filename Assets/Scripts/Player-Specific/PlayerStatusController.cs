@@ -66,12 +66,12 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 
 	void PlayerDeath()
 	{
-		gameController.TriggerReset();
-
 		var torch = Instantiate(torchDropPrefab, transform.position, Quaternion.identity);
 		gameController.GenerateTorch(torch.GetComponent<TorchMarker>());
 
-		Destroy(gameObject);
+		gameController.TriggerReset();
+
+		Destroy(GetComponentInChildren<SpriteRenderer>());
 	}
 
 	public void GetFlame()
