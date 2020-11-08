@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +7,14 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     int timeBeforeRespawn = 2;
+	[SerializeField]
+	GameObject PauseMenu;
 
     List<TorchMarker> torches = new List<TorchMarker>();
     public SpawnPosition[] spawnPositions;
     public List<EnemyAI> activeEnemies = new List<EnemyAI>();
+
+	bool isPaused = false;
 
     void Start()
     {
@@ -17,7 +22,34 @@ public class GameController : MonoBehaviour
         CollectActiveEnemies();
     }
 
-    void CollectActiveEnemies()
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Escape)) TogglePauseGame();
+
+		if (Input.GetButtonDown("Retry")) ResetLevel();
+	}
+
+	public void TogglePauseGame()
+	{
+		if (isPaused) UnPauseGame();
+		else PauseGame();
+	}
+
+	private void PauseGame()
+	{
+		isPaused = true;
+		Time.timeScale = 0;
+		PauseMenu.SetActive(true);
+	}
+
+	private void UnPauseGame()
+	{
+		isPaused = false;
+		Time.timeScale = 1;
+		PauseMenu.SetActive(false);
+	}
+
+	void CollectActiveEnemies()
 	{
         activeEnemies = new List<EnemyAI>();
 
@@ -43,6 +75,8 @@ public class GameController : MonoBehaviour
 
 	private void ResetLevel()
 	{
+		Destroy(FindObjectOfType<PlayerStatusController>().gameObject);
+
 		foreach (EnemyAI enemy in activeEnemies)
 		{
 			// Idk why this works but if I don't do a null check here the respawns break
