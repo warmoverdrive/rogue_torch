@@ -25,6 +25,7 @@ public class LevelGeneration : MonoBehaviour
 	//storage Vector2Ints of key points for pathfinding
 	private Vector2Int startingRoom;
 	private Vector2Int endingRoom;
+	private Vector2Int exitRoom;
 	private List<Vector2Int> deadEndGrids = new List<Vector2Int>();
 
     private void Awake()
@@ -74,6 +75,9 @@ public class LevelGeneration : MonoBehaviour
 
 		endingRoom = new Vector2Int(levelWidthInRooms - 1, Random.Range(0, levelHeightInRooms));
 		InitializeRoom(endingRoom.x, endingRoom.y, Room.Type.EndRoom);
+
+		var exitRoomCoords = new Vector2Int(endingRoom.x + 1, endingRoom.y);
+		GenerateExitRoom(InitializeExitRoom(), exitRoomCoords.x, exitRoomCoords.y);	
 	}
 
 	private void GenerateDeadEndsList()
@@ -100,7 +104,6 @@ public class LevelGeneration : MonoBehaviour
 	private Room.Type CheckNeighbors(int currentX, int currentY, bool deadEnd)
 	{
 		bool up, down, left, right;
-		List<Room.Type> acceptableTypes = new List<Room.Type>();
 
 		// Check Up
 		if (currentY + 1 < levelHeightInRooms) // check OOB (out of bounds)
@@ -266,12 +269,26 @@ public class LevelGeneration : MonoBehaviour
         castleMap[gridX, gridY].roomType = roomType;
 	}
 
+	private Room InitializeExitRoom()
+	{
+		Room exitRoom = new GameObject().AddComponent<Room>();
+		exitRoom.roomPalette = roomArchetype.roomPalette;
+		exitRoom.roomType = Room.Type.Exit;
+
+		return exitRoom;
+	}
+
 	private void ChangeRoomType(int gridX, int gridY, Room.Type roomType) { castleMap[gridX, gridY].roomType = roomType; }
 
     private void GenerateRoom(int gridX, int gridY)
     {
         castleMap[gridX, gridY].CreateRoom(gridX * roomWidth, gridY * roomHeight, parentObject);
     }
+
+	private void GenerateExitRoom(Room exitRoom, int gridX, int gridY)
+	{
+		exitRoom.CreateRoom(gridX * roomWidth, gridY * roomHeight, parentObject);
+	}
 
     private Room CheckRoom(int gridX, int gridY)
     {

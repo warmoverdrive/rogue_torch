@@ -5,7 +5,8 @@ using UnityEditor;
     menuName = "ScriptableObjects/Room Palette Object", order = 1)]
 public class RoomPalette : ScriptableObject
 {
-    public GameObject blankRoom;
+    public GameObject blankRoom, 
+        exitRoom;
     public GameObject[] startRooms,
         endRooms,
         LRRooms,
