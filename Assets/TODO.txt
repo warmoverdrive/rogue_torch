@@ -1,7 +1,6 @@
 TODO:
 						
 Exit Update:
-	* Have an escape room with a seperate camera volume
 	* Send to Score Screen on trigger with an "exit"
 	
 Rooms Update:
