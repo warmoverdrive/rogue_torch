@@ -6,11 +6,23 @@ using UnityEngine.UI;
 public class MenuLogic : MonoBehaviour
 {
     [SerializeField]
-    InputField seedField; 
+    InputField seedField;
+	SeedManager seedManager;
 
-    public void StartGame()
+	private void Start()
+	{
+		seedManager = FindObjectOfType<SeedManager>();
+	}
+
+	public void StartGame()
 	{
 		ParseAndSetSeed();
+		SceneController.LoadGame();
+	}
+
+	public void PlayAgain()
+	{
+		seedManager.SetSeed(seedManager.seed);
 		SceneController.LoadGame();
 	}
 
@@ -24,7 +36,8 @@ public class MenuLogic : MonoBehaviour
 
 		if (int.TryParse(seedStr, out int seed))
 		{
-			Random.InitState(seed);
+			seedManager.SetSeed(seed);
 		}
+		else seedManager.SetSeed(0);
 	}
 }

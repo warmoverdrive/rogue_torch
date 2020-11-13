@@ -23,6 +23,7 @@ public class PlayerMovementController : MonoBehaviour
     public bool canDrop = false;
     bool isDropping = false;
     public bool isTakingAction = false;
+    public bool hasExited;
 
     // Data variables
     int groundLayer;
@@ -42,6 +43,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
+        if (hasExited) return;
         if(statusController.IsDead() == false && !isTakingAction)
 		{
             if (Input.GetAxis("Horizontal") != 0 && !isDropping) Move();

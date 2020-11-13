@@ -28,6 +28,7 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 
 	bool isDead = false;
 	int extraTorchHits = 0;
+	int torchesCollected;
 
 	TorchCounter torchCounter;
 	Light2D playerTorch;
@@ -37,12 +38,13 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 
 	private void Start()
 	{
+		torchesCollected = hitPoints;
 		playerTorch = GetComponentInChildren<Light2D>();
 		torchFX = GetComponentInChildren<TorchFX>();
 		action = GetComponent<PlayerAction>();
 		torchCounter = FindObjectOfType<TorchCounter>();
 		gameController = FindObjectOfType<GameController>();
-		torchCounter.SetText(hitPoints);
+		torchCounter.SetText(hitPoints, torchesCollected);
 	}
 
 	public void Hit(int damage)
@@ -52,14 +54,14 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 		{
 			if (hitPoints - damage <= 0)
 			{
-				torchCounter.SetText(0);
+				torchCounter.SetText(0, torchesCollected);
 				PlayerDeath();
 			}
 			else
 			{
 				hitPoints -= damage;
 				IncrementTorchNegative();
-				torchCounter.SetText(hitPoints);
+				torchCounter.SetText(hitPoints, torchesCollected);
 			}
 		}
 	}
@@ -76,9 +78,11 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 
 	public void GetFlame()
 	{
+		if (isDead) return;
 		hitPoints += hitPointsPerTorch;
+		torchesCollected += hitPointsPerTorch;
 		IncrementTorchPositive();
-		torchCounter.SetText(hitPoints);
+		torchCounter.SetText(hitPoints, torchesCollected);
 	}
 
 	private void IncrementTorchPositive()
