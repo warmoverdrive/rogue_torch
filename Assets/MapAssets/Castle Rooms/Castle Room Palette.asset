@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blankRoom: {fileID: 4813670672239498965, guid: dc47248451a686040b7a1f04b6ff5b9b,
     type: 3}
+  exitRoom: {fileID: 497726919906731285, guid: 2f7f8a3014bf57b4da73fc4a0742586e, type: 3}
   startRooms:
   - {fileID: 9139666895026421942, guid: a3a2bb64befd39c499e6d9c857c1f449, type: 3}
   endRooms:

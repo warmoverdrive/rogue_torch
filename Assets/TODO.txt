@@ -1,16 +1,29 @@
 TODO:
-						
-Exit Update:
-	* Have an escape room with a seperate camera volume
-	* Send to Score Screen on trigger with an "exit"
 	
 Rooms Update:
 	* Create environment asset art:
-		> Background windows
 		> Furniture
 		> Objects of interest
 		> "Doors"
 	* Create at least 3 of each type room for generation
+		L
+		R
+		U
+		D
+		LR
+		UP
+		LRUD
+		LRU
+		LRD
+		LU
+		LD
+		RU
+		RD
+		LUD
+		RUD
+		Start
+		End
+	* Populate Palette with Rooms
 	
 Minimum Viable Product Reached...
 
@@ -20,3 +33,4 @@ STRETCH UPDATES:
 	* Bosses Update
 	* Gold Update
 	* Post-Process/VFX Update
+	* Biomes Update

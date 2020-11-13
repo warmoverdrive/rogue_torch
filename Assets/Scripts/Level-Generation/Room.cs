@@ -30,7 +30,8 @@ public class Room : MonoBehaviour
         R,
         U,
         D,
-        Blank
+        Blank,
+        Exit
     }
 
 	private void Start()
@@ -96,6 +97,9 @@ public class Room : MonoBehaviour
                 break;
             case Type.Blank:
                 roomToSpawn = roomPalette.blankRoom;
+                break;
+            case Type.Exit:
+                roomToSpawn = roomPalette.exitRoom;
                 break;
         }
 
