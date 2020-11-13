@@ -21,14 +21,24 @@ MonoBehaviour:
   - {fileID: 7903509644639826854, guid: 52ca20b1cffdf0c449a678e61f4c873e, type: 3}
   LRRooms:
   - {fileID: 7903509644639826854, guid: 6191014bfb0273444a504405af068b8c, type: 3}
+  - {fileID: 7326629759222234121, guid: b48e7a39e6ced394dbfec64966f7b7a9, type: 3}
+  - {fileID: 1186512133636135963, guid: 6ecd52f87b7bcf54fae313492c8cde8f, type: 3}
   UDRooms:
   - {fileID: 450674698027980764, guid: 65ea4aec8ee8457429fc9bcafbc6a6f2, type: 3}
+  - {fileID: 3791174483784212895, guid: 737164cadefe17245809c855deba0417, type: 3}
+  - {fileID: 6000874203236526266, guid: 308d9929980bd364e84f36253ce3d0b4, type: 3}
   LRUDRooms:
   - {fileID: 3323185678017539636, guid: d4ce58f63df5f2f4991c7aa51d1aedb1, type: 3}
+  - {fileID: 5666682538717558033, guid: f770579b39bfb8c41b961967e0dd3769, type: 3}
+  - {fileID: 4287727211092584091, guid: 4f6d45618d8a72848ab0276867997fb3, type: 3}
   LRURooms:
   - {fileID: 6215005855772661826, guid: 4c9f5b97fbdaf16499905a66c5e69c4b, type: 3}
+  - {fileID: 1522419084424113269, guid: c9a08b7fde304aa41a7e6e230c102353, type: 3}
+  - {fileID: 6409175816997994657, guid: f898891582f96a1419a873450272a0c3, type: 3}
   LRDRooms:
   - {fileID: 4401991133542826522, guid: fc871c7b9627429408fe681135551dc7, type: 3}
+  - {fileID: 6077526656377837637, guid: 7dbc7f87da5de8244b37e933e2773f94, type: 3}
+  - {fileID: 2280838069465414696, guid: 87ca05edfa342e246ac5b31ddaef8f55, type: 3}
   LUDRooms:
   - {fileID: 2912949569764896141, guid: 1bc03efadf7098445911dec7d91100b8, type: 3}
   RUDRooms:

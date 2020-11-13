@@ -1,20 +1,11 @@
 TODO:
 	
 Rooms Update:
-	* Create environment asset art:
-		> Furniture
-		> Objects of interest
-		> "Doors"
 	* Create at least 3 of each type room for generation
 		L
 		R
 		U
 		D
-		LR
-		UP
-		LRUD
-		LRU
-		LRD
 		LU
 		LD
 		RU
