@@ -20,6 +20,11 @@ CleanUp Update:
 	* Fix Enemy Movement so they bounce off eachother OR so they dont collide with eachother
 	* Fix Player being able to move when dead
 	* Dont forget to re-enable End Screen UI!
+
+Custom Generation Update:
+	* Create Custom Generation Menu
+	* Create Slider Vars for Castle Width, Height, and Blank Rooms
+	* Pass Vars into Level Generation
 	
 Minimum Viable Product Reached...
 
