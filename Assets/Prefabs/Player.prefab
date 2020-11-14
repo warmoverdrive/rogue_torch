@@ -462,7 +462,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 1
   hitPointsPerTorch: 1
-  timeBeforeRespawn: 3
   torchOuterRadiusStart: 8
   torchInnerRadiusStart: 1
   torchOuterRadiusMax: 16
@@ -491,6 +490,7 @@ MonoBehaviour:
   isJumping: 0
   canDrop: 0
   isTakingAction: 0
+  hasExited: 0
 --- !u!114 &2816325962911619315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 1
-  m_ApplyToSortingLayers: cf4c4430
+  m_ApplyToSortingLayers: cf4c443000000000
   m_ShapePath:
   - {x: -0.1522665, y: 0.027769566, z: 0}
   - {x: -0.19398308, y: 0.41364813, z: 0}
@@ -610,4 +610,4 @@ MonoBehaviour:
   - {x: -0.41299486, y: 0.22592306, z: 0}
   m_ShapePathHash: 654946053
   m_Mesh: {fileID: 0}
-  m_InstanceId: 43674
+  m_InstanceId: 57074

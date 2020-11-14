@@ -2,16 +2,7 @@ TODO:
 	
 Rooms Update:
 	* Create at least 3 of each type room for generation
-		L
-		R
-		U
 		D
-		LU
-		LD
-		RU
-		RD
-		LUD
-		RUD
 		Start
 		End
 	* Populate Palette with Rooms
@@ -27,6 +18,8 @@ Sound Update:
 
 CleanUp Update:
 	* Fix Enemy Movement so they bounce off eachother OR so they dont collide with eachother
+	* Fix Player being able to move when dead
+	* Dont forget to re-enable End Screen UI!
 	
 Minimum Viable Product Reached...
 
