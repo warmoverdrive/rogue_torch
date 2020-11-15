@@ -1,11 +1,10 @@
 TODO:
-	
-Rooms Update:
-	* Create at least 3 of each type room for generation
-		D
-		Start
-		End
-	* Populate Palette with Rooms
+
+
+CleanUp Update:
+	* Fix Enemy Movement so they bounce off eachother OR so they dont collide with eachother
+	* Fix Player being able to move when dead
+	* Check for Ground Collision to disable "can drop" so you cant glitch through floors
 
 Sound Update:
 	* Attack sound
@@ -15,11 +14,6 @@ Sound Update:
 	* Enemy Aggro'd sound
 	* Footsteps sound?
 	* Ambient Music?
-
-CleanUp Update:
-	* Fix Enemy Movement so they bounce off eachother OR so they dont collide with eachother
-	* Fix Player being able to move when dead
-	* Dont forget to re-enable End Screen UI!
 
 Custom Generation Update:
 	* Create Custom Generation Menu
