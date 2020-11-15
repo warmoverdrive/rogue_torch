@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerMovementController : MonoBehaviour
 {
     [Header("Design Levers")]
@@ -12,6 +12,10 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     float dropSpeed = 1f;
     [SerializeField]
+    float footstepRate = 0.5f;
+    [SerializeField]
+    AudioClip[] footstepSounds;
+    [SerializeField]
     PhysicsMaterial2D groundMaterial, jumpMaterial;
 
     // Internal Component References
@@ -19,6 +23,7 @@ public class PlayerMovementController : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     CapsuleCollider2D capsuleCollider;
+    AudioSource audioSource;
 
     // status variables
     bool facingRight = true;
@@ -27,6 +32,7 @@ public class PlayerMovementController : MonoBehaviour
     bool isDropping = false;
     public bool isTakingAction = false;
     public bool hasExited;
+    float footstepCooldown;
 
     // Data variables
     int groundLayer;
@@ -43,6 +49,8 @@ public class PlayerMovementController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         groundLayer = LayerMask.NameToLayer("Ground");
         platformLayer = LayerMask.NameToLayer("Platform");
+        audioSource = GetComponent<AudioSource>();
+        footstepCooldown = footstepRate;
     }
 
     void Update()
@@ -94,6 +102,8 @@ public class PlayerMovementController : MonoBehaviour
     {
         animator.SetBool("isWalking", true);
 
+        Footsteps();
+
         float deltaX = moveSpeed * Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(deltaX, rb.velocity.y);
 
@@ -101,7 +111,19 @@ public class PlayerMovementController : MonoBehaviour
         else if (Mathf.Sign(deltaX) == -1) facingRight = false;
     }
 
-    void Flip()
+	private void Footsteps()
+	{
+        footstepCooldown -= Time.deltaTime;
+        if (footstepCooldown <= Mathf.Epsilon && !isJumping)
+		{
+            audioSource.pitch += Random.Range(-0.25f, 0.25f);
+            audioSource.PlayOneShot(footstepSounds[Random.Range(0, footstepSounds.Length)]);
+            audioSource.pitch = 1;
+            footstepCooldown = footstepRate;
+		}
+	}
+
+	void Flip()
     {
         if (facingRight) transform.localScale = rightFaceScale;
         else transform.localScale = leftFaceScale;

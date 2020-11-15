@@ -27,6 +27,15 @@ public class PlayerAction : MonoBehaviour
     {
         if (playerStatus.IsDead()) return;
 
+        if (Input.GetButtonUp("Block"))
+		{
+            isBlocking = false;
+            animator.SetBool("isBlocking", false);
+            movementController.isTakingAction = false;
+		}
+
+        if (movementController.isTakingAction) return;
+
         if (Input.GetButtonDown("Attack") && !isBlocking)
 		{
             StartCoroutine(Attack());
@@ -39,12 +48,6 @@ public class PlayerAction : MonoBehaviour
             animator.SetBool("isBlocking", true);
         }
 
-        if (Input.GetButtonUp("Block"))
-		{
-            isBlocking = false;
-            animator.SetBool("isBlocking", false);
-            movementController.isTakingAction = false;
-		}
     }
 
     private IEnumerator Attack()

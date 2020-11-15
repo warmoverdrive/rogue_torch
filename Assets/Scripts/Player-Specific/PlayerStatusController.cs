@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using Cinemachine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerStatusController : MonoBehaviour, IDamagable
 {
 	[Header("Design Levers")]
@@ -19,6 +19,10 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 		torchInnerSizeIncriment = 0.25f,
 		FXStartIntensity = 1.5f,
 		FXIntensityIncrement = 0.25f;
+	[SerializeField]
+	AudioClip hurtSound, deathSound;
+	[SerializeField]
+	AudioClip[] blockSounds;
 
 	[Header("Prefabs and References")]
 	[SerializeField]
@@ -36,6 +40,7 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 	GameController gameController;
 	PlayerAction action;
 	ShadowCaster2D shadowCaster;
+	AudioSource audioSource;
 
 	private void Start()
 	{
@@ -46,22 +51,26 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 		action = GetComponent<PlayerAction>();
 		torchCounter = FindObjectOfType<TorchCounter>();
 		gameController = FindObjectOfType<GameController>();
+		audioSource = GetComponent<AudioSource>();
 		torchCounter.SetText(hitPoints, torchesCollected);
 	}
 
 	public void Hit(int damage)
 	{
-		if (action.isBlocking) return;
+		if (action.isBlocking) 
+			audioSource.PlayOneShot(blockSounds[Random.Range(0, blockSounds.Length)]);
 		else
 		{
 			if (hitPoints - damage <= 0)
 			{
+				audioSource.PlayOneShot(deathSound);
 				torchCounter.SetText(0, torchesCollected);
 				isDead = true;
 				PlayerDeath();
 			}
 			else
 			{
+				audioSource.PlayOneShot(hurtSound);
 				hitPoints -= damage;
 				IncrementTorchNegative();
 				torchCounter.SetText(hitPoints, torchesCollected);
