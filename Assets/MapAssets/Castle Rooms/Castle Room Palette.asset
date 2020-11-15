@@ -17,8 +17,12 @@ MonoBehaviour:
   exitRoom: {fileID: 497726919906731285, guid: 2f7f8a3014bf57b4da73fc4a0742586e, type: 3}
   startRooms:
   - {fileID: 9139666895026421942, guid: a3a2bb64befd39c499e6d9c857c1f449, type: 3}
+  - {fileID: 1324051009733203841, guid: f8b2f8d1ca16dfc43881bea245b6940f, type: 3}
+  - {fileID: 6115022832772259460, guid: cd05057366c86104cb02d5cfa8a66abd, type: 3}
   endRooms:
   - {fileID: 7903509644639826854, guid: 52ca20b1cffdf0c449a678e61f4c873e, type: 3}
+  - {fileID: 4746258013372195787, guid: 6ea0b086ce1517d4cacba8992af16d49, type: 3}
+  - {fileID: 3156007282580308722, guid: 9284c48c9f19e3a4eaa7c7d5ff6b108c, type: 3}
   LRRooms:
   - {fileID: 7903509644639826854, guid: 6191014bfb0273444a504405af068b8c, type: 3}
   - {fileID: 7326629759222234121, guid: b48e7a39e6ced394dbfec64966f7b7a9, type: 3}
@@ -73,5 +77,9 @@ MonoBehaviour:
   - {fileID: 6079188282023113875, guid: 6d16ce6d5ad004742a3d6ee7e8630966, type: 3}
   URooms:
   - {fileID: 67659215464976859, guid: a36eb19817a86bf46b420160856df57d, type: 3}
+  - {fileID: 5413847305297677024, guid: 8bd18d2909867484cac5cbf6b8c1a4c3, type: 3}
+  - {fileID: 3489421657838320972, guid: 3918129571fe04440839774b79f69542, type: 3}
   DRooms:
   - {fileID: 6161405396145578599, guid: 970c2010d80119d4595c61ee648a506d, type: 3}
+  - {fileID: 2089350750395626426, guid: b85ccee30ca56bd4c9328ca78d09d23c, type: 3}
+  - {fileID: 478295316817730941, guid: 5f9ebacb1cf84374e85324f3550c12d2, type: 3}
