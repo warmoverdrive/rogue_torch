@@ -3888,7 +3888,7 @@ MonoBehaviour:
   - {x: -16, y: 9, z: 0}
   m_ShapePathHash: 956897541
   m_Mesh: {fileID: 0}
-  m_InstanceId: -343666
+  m_InstanceId: -867446
 --- !u!1 &3331857682779707693
 GameObject:
   m_ObjectHideFlags: 0
@@ -9283,7 +9283,7 @@ MonoBehaviour:
   - {x: 2, y: 9, z: 0}
   m_ShapePathHash: 478078037
   m_Mesh: {fileID: 0}
-  m_InstanceId: -343676
+  m_InstanceId: -867456
 --- !u!1 &6000874203236526266
 GameObject:
   m_ObjectHideFlags: 0
@@ -9330,7 +9330,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6000874203236526266}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
   m_Name: 
@@ -9352,7 +9352,7 @@ MonoBehaviour:
   - {x: 6, y: -4, z: 0}
   m_ShapePathHash: -98471579
   m_Mesh: {fileID: 0}
-  m_InstanceId: -343646
+  m_InstanceId: -867426
 --- !u!114 &948151990611186081
 MonoBehaviour:
   m_ObjectHideFlags: 0
