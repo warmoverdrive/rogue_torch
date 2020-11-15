@@ -1,11 +1,5 @@
 TODO:
 
-
-CleanUp Update:
-	* Fix Enemy Movement so they bounce off eachother OR so they dont collide with eachother
-	* Fix Player being able to move when dead
-	* Check for Ground Collision to disable "can drop" so you cant glitch through floors
-
 Sound Update:
 	* Attack sound
 	* Player Hit sound

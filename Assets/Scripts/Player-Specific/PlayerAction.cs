@@ -12,17 +12,21 @@ public class PlayerAction : MonoBehaviour
 
     Animator animator;
     PlayerMovementController movementController;
+    PlayerStatusController playerStatus;
     IAttack attackAction;
     
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         movementController = GetComponent<PlayerMovementController>();
+        playerStatus = GetComponent<PlayerStatusController>();
         attackAction = GetComponent<IAttack>();
     }
 
     void Update()
     {
+        if (playerStatus.IsDead()) return;
+
         if (Input.GetButtonDown("Attack") && !isBlocking)
 		{
             StartCoroutine(Attack());

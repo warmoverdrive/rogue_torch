@@ -35,11 +35,13 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 	TorchFX torchFX;
 	GameController gameController;
 	PlayerAction action;
+	ShadowCaster2D shadowCaster;
 
 	private void Start()
 	{
 		torchesCollected = hitPoints;
 		playerTorch = GetComponentInChildren<Light2D>();
+		shadowCaster = GetComponent<ShadowCaster2D>();
 		torchFX = GetComponentInChildren<TorchFX>();
 		action = GetComponent<PlayerAction>();
 		torchCounter = FindObjectOfType<TorchCounter>();
@@ -55,6 +57,7 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 			if (hitPoints - damage <= 0)
 			{
 				torchCounter.SetText(0, torchesCollected);
+				isDead = true;
 				PlayerDeath();
 			}
 			else
@@ -74,6 +77,7 @@ public class PlayerStatusController : MonoBehaviour, IDamagable
 		gameController.TriggerReset();
 
 		Destroy(GetComponentInChildren<SpriteRenderer>());
+		Destroy(shadowCaster);
 	}
 
 	public void GetFlame()

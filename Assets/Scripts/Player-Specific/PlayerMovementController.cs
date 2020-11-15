@@ -11,11 +11,14 @@ public class PlayerMovementController : MonoBehaviour
     float jumpForce = 1f;
     [SerializeField]
     float dropSpeed = 1f;
+    [SerializeField]
+    PhysicsMaterial2D groundMaterial, jumpMaterial;
 
     // Internal Component References
     PlayerStatusController statusController;
     Animator animator;
     Rigidbody2D rb;
+    CapsuleCollider2D capsuleCollider;
 
     // status variables
     bool facingRight = true;
@@ -37,14 +40,17 @@ public class PlayerMovementController : MonoBehaviour
         statusController = GetComponent<PlayerStatusController>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         groundLayer = LayerMask.NameToLayer("Ground");
         platformLayer = LayerMask.NameToLayer("Platform");
     }
 
     void Update()
     {
-        if (hasExited) return;
-        if(statusController.IsDead() == false && !isTakingAction)
+        capsuleCollider.sharedMaterial = (isJumping == true) ? jumpMaterial : groundMaterial;
+        
+        if (hasExited || statusController.IsDead()) return;
+        if(!isTakingAction)
 		{
             if (Input.GetAxis("Horizontal") != 0 && !isDropping) Move();
             else animator.SetBool("isWalking", false);
@@ -109,6 +115,7 @@ public class PlayerMovementController : MonoBehaviour
         if (layer == groundLayer)
         {
             isJumping = false;
+            canDrop = false;
         }
         else if (layer == platformLayer)
         {
