@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class EnemyAI : MonoBehaviour
 {
     [Header("Design Levers")]
@@ -15,6 +16,9 @@ public class EnemyAI : MonoBehaviour
 	float attackWindUp = 0.25f,
 		attackCoolDown = 0.25f,
 		blockTime = 1f;
+	[SerializeField]
+	AudioClip alertSound;
+
 	[Header("Action Properties")]
 	[SerializeField]
 	bool canBlock = true;
@@ -24,8 +28,8 @@ public class EnemyAI : MonoBehaviour
 		idleChance = 20;
 
 	int ratioTotal;
-
-    public bool playerSighted { get; private set; } = false;
+	bool alerted = false;
+    public bool playerInSight { get; private set; } = false;
 	public bool isPerformingAction { get; private set; } = false;
 
     EnemyMovement enemyMovement;
@@ -35,6 +39,7 @@ public class EnemyAI : MonoBehaviour
     int PLAYER_MASK;
 	GameObject target;
 	IAttack attack;
+	AudioSource audioSource;
 
 
 	void Start()
@@ -44,6 +49,7 @@ public class EnemyAI : MonoBehaviour
         PLAYER_MASK = LayerMask.GetMask("Player");
         enemyMovement = GetComponent<EnemyMovement>();
 		attack = GetComponent<IAttack>();
+		audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -59,6 +65,12 @@ public class EnemyAI : MonoBehaviour
 	private void Update()
 	{
 		if (animator.GetBool("isDead")) return;
+		if (playerInSight && !alerted)
+		{
+			audioSource.PlayOneShot(alertSound);
+			alerted = true;
+		}
+
 		else if (statusController.IsDead()) animator.SetBool("isDead", true);
 	}
 
@@ -116,7 +128,7 @@ public class EnemyAI : MonoBehaviour
 
 		if (sightCast.collider)
 		{
-			playerSighted = true;
+			playerInSight = true;
 
 			target = sightCast.collider.gameObject;
 
@@ -127,8 +139,9 @@ public class EnemyAI : MonoBehaviour
 		}
 		else
 		{
-			playerSighted = false;
+			playerInSight = false;
 			target = null;
+			alerted = false;
 		}
 	}
 

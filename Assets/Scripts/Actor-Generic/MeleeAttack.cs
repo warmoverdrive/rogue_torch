@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class MeleeAttack : MonoBehaviour, IAttack
 {
 	[Header("Design Levers")]
@@ -8,9 +9,21 @@ public class MeleeAttack : MonoBehaviour, IAttack
 	float attackRange = 1.5f;
 	[SerializeField]
 	int attackDamage = 1;
+	[SerializeField]
+	AudioClip[] attackSounds;
+
+	AudioSource audioSource;
+
+	private void Start()
+	{
+		audioSource = GetComponent<AudioSource>();
+	}
 
 	public void Attack(bool isFacingRight)
 	{
+
+		audioSource.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length)]);
+
 		Vector2 direction;
 		if (isFacingRight) direction = Vector2.right;
 		else direction = Vector2.left;
