@@ -484,7 +484,7 @@ MonoBehaviour:
   - {x: -16, y: 9, z: 0}
   m_ShapePathHash: -1791625963
   m_Mesh: {fileID: 0}
-  m_InstanceId: -492752
+  m_InstanceId: -848472
 --- !u!1 &3376825516971559137
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +859,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5cf84eca0a20ee54782dcea76416a8c5, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -877,8 +877,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1350879791
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dcd8fc973808d894d83715162e38058f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -986,7 +986,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5524256226571576789}
   m_LocalRotation: {x: -0, y: -0, z: 0.94670874, w: 0.322091}
-  m_LocalPosition: {x: 19.3, y: 11.9, z: 0}
+  m_LocalPosition: {x: 17.52, y: 10.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7236410890320428693}
@@ -1006,21 +1006,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.778
   m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
-  m_Intensity: 2.44
-  m_LightVolumeOpacity: 0.13
+  m_Intensity: 1.82
+  m_LightVolumeOpacity: 0.037
   m_ApplyToSortingLayers: 00000000955b4fb31516ec3acf4c4430
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 1
-  m_ShadowIntensity: 0.397
-  m_ShadowVolumeIntensity: 1
-  m_PointLightInnerAngle: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 59.15
   m_PointLightOuterAngle: 177
-  m_PointLightInnerRadius: 28.426458
-  m_PointLightOuterRadius: 60.705585
+  m_PointLightInnerRadius: 27.423962
+  m_PointLightOuterRadius: 105.185196
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -3895,7 +3895,7 @@ MonoBehaviour:
   - {x: -16, y: -6, z: 0}
   m_ShapePathHash: 924938597
   m_Mesh: {fileID: 0}
-  m_InstanceId: -492742
+  m_InstanceId: -848462
 --- !u!1 &8428896005126477454
 GameObject:
   m_ObjectHideFlags: 0
