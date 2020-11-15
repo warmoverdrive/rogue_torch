@@ -23,7 +23,7 @@ public class TorchMarker : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         thisTorch = GetComponentInChildren<Light2D>();
 
-        animator.SetTrigger("isDead");
+        animator.Play("Death");
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
