@@ -1,29 +1,30 @@
 TODO:
 	
 Rooms Update:
-	* Create environment asset art:
-		> Furniture
-		> Objects of interest
-		> "Doors"
 	* Create at least 3 of each type room for generation
-		L
-		R
-		U
 		D
-		LR
-		UP
-		LRUD
-		LRU
-		LRD
-		LU
-		LD
-		RU
-		RD
-		LUD
-		RUD
 		Start
 		End
 	* Populate Palette with Rooms
+
+Sound Update:
+	* Attack sound
+	* Player Hit sound
+	* Enemy Hit sound
+	* Block sound
+	* Enemy Aggro'd sound
+	* Footsteps sound?
+	* Ambient Music?
+
+CleanUp Update:
+	* Fix Enemy Movement so they bounce off eachother OR so they dont collide with eachother
+	* Fix Player being able to move when dead
+	* Dont forget to re-enable End Screen UI!
+
+Custom Generation Update:
+	* Create Custom Generation Menu
+	* Create Slider Vars for Castle Width, Height, and Blank Rooms
+	* Pass Vars into Level Generation
 	
 Minimum Viable Product Reached...
 
