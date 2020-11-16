@@ -7,13 +7,13 @@ public class LevelGeneration : MonoBehaviour
     [Header("Level Parameters")]
     [SerializeField]
     Room roomArchetype;
-    [SerializeField]
-    int roomWidth = 32,
-        roomHeight = 18,
-        levelWidthInRooms = 8,
-        levelHeightInRooms = 5;
-    [SerializeField]
-    int numberOfDeadEnds = 5;
+	[SerializeField]
+	int roomWidth = 32,
+		roomHeight = 18;
+
+	public int numberOfBlankRooms,
+		castleWidthInRooms,
+		castleHeightInRooms;
 
 	private PolygonCollider2D polyCollider;
 
@@ -25,21 +25,22 @@ public class LevelGeneration : MonoBehaviour
 	//storage Vector2Ints of key points for pathfinding
 	private Vector2Int startingRoom;
 	private Vector2Int endingRoom;
-	private Vector2Int exitRoom;
-	private List<Vector2Int> deadEndGrids = new List<Vector2Int>();
+	private List<Vector2Int> blankRoomGrids = new List<Vector2Int>();
 
     private void Awake()
 	{
+		GetGenerationSettings();
+
 		polyCollider = GetComponent<PolygonCollider2D>();
 		SetPoligonColliderBounds();
 
 		parentObject = transform.GetComponentInParent<Transform>();
 
-		castleMap = new Room[levelWidthInRooms, levelHeightInRooms];
+		castleMap = new Room[castleWidthInRooms, castleHeightInRooms];
 
 		CreateStartAndEndRooms();
 
-		GenerateDeadEndsList();
+		GenerateBlankRoomsList();
 
 		GeneratePath();
 
@@ -50,9 +51,19 @@ public class LevelGeneration : MonoBehaviour
 		GenerateAllRooms();
 	}
 
+	private void GetGenerationSettings()
+	{
+		var levelGenManager = FindObjectOfType<LevelGenManager>();
+		if (levelGenManager == null) Debug.LogError("No Level Gen Manager Found!");
+
+		numberOfBlankRooms = levelGenManager.blankRooms;
+		castleWidthInRooms = levelGenManager.castleWidthInRooms;
+		castleHeightInRooms = levelGenManager.castleHeightInRooms;
+	}
+
 	private void GeneratePath()
 	{
-		Pathfinder pathfinder = new Pathfinder(castleMap, startingRoom, endingRoom, deadEndGrids);
+		Pathfinder pathfinder = new Pathfinder(castleMap, startingRoom, endingRoom, blankRoomGrids);
 		path = pathfinder.CalculatePath();
 	}
 
@@ -70,33 +81,33 @@ public class LevelGeneration : MonoBehaviour
 
 	private void CreateStartAndEndRooms()
 	{
-		startingRoom = new Vector2Int(0, Random.Range(0, levelHeightInRooms));
+		startingRoom = new Vector2Int(0, Random.Range(0, castleHeightInRooms));
 		InitializeRoom(startingRoom.x, startingRoom.y, Room.Type.StartRoom);
 
-		endingRoom = new Vector2Int(levelWidthInRooms - 1, Random.Range(0, levelHeightInRooms));
+		endingRoom = new Vector2Int(castleWidthInRooms - 1, Random.Range(0, castleHeightInRooms));
 		InitializeRoom(endingRoom.x, endingRoom.y, Room.Type.EndRoom);
 
 		var exitRoomCoords = new Vector2Int(endingRoom.x + 1, endingRoom.y);
 		GenerateExitRoom(InitializeExitRoom(), exitRoomCoords.x, exitRoomCoords.y);	
 	}
 
-	private void GenerateDeadEndsList()
+	private void GenerateBlankRoomsList()
 	{
-		for (int deadEndsGenerated = 0; deadEndsGenerated < numberOfDeadEnds; deadEndsGenerated++)
+		for (int blankRoomsGenerated = 0; blankRoomsGenerated < numberOfBlankRooms; blankRoomsGenerated++)
 		{
-			int randX = Random.Range(0, levelWidthInRooms - 1);
-			int randY = Random.Range(0, levelHeightInRooms - 1);
+			int randX = Random.Range(0, castleWidthInRooms - 1);
+			int randY = Random.Range(0, castleHeightInRooms - 1);
 
 			if(CheckRoom(randX, randY) == null)
 			{
-				Vector2Int deadEndPos = new Vector2Int(randX, randY);
-				if ((deadEndPos + Vector2Int.left) != startingRoom &&
-					(deadEndPos + Vector2Int.right) != endingRoom)
+				Vector2Int blankRoomPos = new Vector2Int(randX, randY);
+				if ((blankRoomPos + Vector2Int.left) != startingRoom &&
+					(blankRoomPos + Vector2Int.right) != endingRoom)
 				{
-					deadEndGrids.Add(deadEndPos);
+					blankRoomGrids.Add(blankRoomPos);
 					InitializeRoom(randX, randY, Room.Type.Blank);
 				}
-				else deadEndsGenerated--;	
+				else blankRoomsGenerated--;	
 			}
 		}
 	}
@@ -106,7 +117,7 @@ public class LevelGeneration : MonoBehaviour
 		bool up, down, left, right;
 
 		// Check Up
-		if (currentY + 1 < levelHeightInRooms) // check OOB (out of bounds)
+		if (currentY + 1 < castleHeightInRooms) // check OOB (out of bounds)
 		{
 			Room checkedRoom = CheckRoom(currentX, currentY + 1);
 			if (checkedRoom != null)
@@ -148,7 +159,7 @@ public class LevelGeneration : MonoBehaviour
 		else down = false;
 
 		// Check Right
-		if (currentX + 1 < levelWidthInRooms) // check OOB (out of bounds)
+		if (currentX + 1 < castleWidthInRooms) // check OOB (out of bounds)
 		{
 			Room checkedRoom = CheckRoom(currentX + 1, currentY);
 			if (checkedRoom != null)
@@ -233,9 +244,9 @@ public class LevelGeneration : MonoBehaviour
 	private void FillRemainingRooms()
 	{
 		// iterate through entire grid
-		for (int y = 0; y < levelHeightInRooms; y++)
+		for (int y = 0; y < castleHeightInRooms; y++)
 		{
-			for (int x = 0; x < levelWidthInRooms; x++)
+			for (int x = 0; x < castleWidthInRooms; x++)
 			{
 				if (!CheckRoom(x, y))
 				{
@@ -249,9 +260,9 @@ public class LevelGeneration : MonoBehaviour
 	private void GenerateAllRooms()
 	{
 		// iterate through grid instantiating all rooms
-		for (int y = 0; y < levelHeightInRooms; y++)
+		for (int y = 0; y < castleHeightInRooms; y++)
 		{
-			for (int x = 0; x < levelWidthInRooms; x++)
+			for (int x = 0; x < castleWidthInRooms; x++)
 			{
 				if (CheckRoom(x, y))
 				{
@@ -300,9 +311,9 @@ public class LevelGeneration : MonoBehaviour
 	{
 		polyCollider.points = new Vector2[] {
 			new Vector2Int(0-(roomWidth/2), 0-(roomHeight/2)),	// bottom left
-			new Vector2Int(0-(roomWidth/2), (roomHeight * levelHeightInRooms) - (roomHeight/2)),	// top left
-			new Vector2Int((roomWidth * levelWidthInRooms) - (roomWidth/2), (roomHeight * levelHeightInRooms) - (roomHeight/2)),   // top right
-			new Vector2Int((roomWidth * levelWidthInRooms) - (roomWidth/2), 0-(roomHeight/2))	// bottom right
+			new Vector2Int(0-(roomWidth/2), (roomHeight * castleHeightInRooms) - (roomHeight/2)),	// top left
+			new Vector2Int((roomWidth * castleWidthInRooms) - (roomWidth/2), (roomHeight * castleHeightInRooms) - (roomHeight/2)),   // top right
+			new Vector2Int((roomWidth * castleWidthInRooms) - (roomWidth/2), 0-(roomHeight/2))	// bottom right
 		};
 	}
 }

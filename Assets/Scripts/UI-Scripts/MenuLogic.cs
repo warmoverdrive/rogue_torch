@@ -7,11 +7,11 @@ public class MenuLogic : MonoBehaviour
 {
     [SerializeField]
     InputField seedField;
-	SeedManager seedManager;
+	LevelGenManager seedManager;
 
 	private void Start()
 	{
-		seedManager = FindObjectOfType<SeedManager>();
+		seedManager = FindObjectOfType<LevelGenManager>();
 	}
 
 	public void StartGame()
@@ -28,7 +28,11 @@ public class MenuLogic : MonoBehaviour
 
 	public void QuitGame() => Application.Quit();
 
-	public void ReturnToMainMenu() => SceneController.LoadMainMenu();
+	public void ReturnToMainMenu()
+	{
+		Time.timeScale = 1;
+		SceneController.LoadMainMenu();
+	}
 
 	private void ParseAndSetSeed()
 	{

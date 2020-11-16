@@ -1,14 +1,8 @@
-TODO:
-
-Custom Generation Update:
-	* Create Custom Generation Menu
-	* Create Slider Vars for Castle Width, Height, and Blank Rooms
-	* Pass Vars into Level Generation
-	
 Minimum Viable Product Reached...
 
 STRETCH UPDATES:
 
+	* Performance Update
 	* Archer Update
 	* Bosses Update
 	* Gold Update

@@ -11,6 +11,6 @@ public class SeedDisplay : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        text.text = FindObjectOfType<SeedManager>().seed.ToString();
+        text.text = FindObjectOfType<LevelGenManager>().seed.ToString();
     }
 }
