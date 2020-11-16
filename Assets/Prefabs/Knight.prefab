@@ -113,8 +113,9 @@ MonoBehaviour:
   sightDistance: 8
   sightCircleRadius: 2
   castOffset: {x: 0.5, y: 0, z: 0}
-  attackWindUp: 0.5
-  attackCoolDown: 0.5
+  actionRange: 3
+  actionWindUp: 0.33
+  actionCoolDown: 0.4
   blockTime: 2.5
   alertSound: {fileID: 8300000, guid: e55d273ad78fef4429eab0cea1069821, type: 3}
   canBlock: 1
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdf33cc85eedf046afdaa82fa4d667b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.5
+  attackRange: 1
   attackDamage: 1
   attackSounds:
   - {fileID: 8300000, guid: 38bda6d140926ee4a97cd23f8d77d20d, type: 3}

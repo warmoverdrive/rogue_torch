@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e488ca0a95a8b14fa798be10a801d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTime: 0.25
+  attackTime: 0.4
 --- !u!114 &4728680789862461574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdf33cc85eedf046afdaa82fa4d667b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.25
+  attackRange: 1.5
   attackDamage: 1
   attackSounds:
   - {fileID: 8300000, guid: 38bda6d140926ee4a97cd23f8d77d20d, type: 3}

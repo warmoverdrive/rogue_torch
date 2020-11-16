@@ -13,8 +13,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     Vector3 castOffset = Vector2.right/2;
 	[SerializeField]
-	float attackWindUp = 0.25f,
-		attackCoolDown = 0.25f,
+	float actionRange = 3f,
+		actionWindUp = 0.25f,
+		actionCoolDown = 0.25f,
 		blockTime = 1f;
 	[SerializeField]
 	AudioClip alertSound;
@@ -65,6 +66,9 @@ public class EnemyAI : MonoBehaviour
 	private void Update()
 	{
 		if (animator.GetBool("isDead")) return;
+
+
+
 		if (playerInSight && !alerted)
 		{
 			audioSource.PlayOneShot(alertSound);
@@ -74,15 +78,15 @@ public class EnemyAI : MonoBehaviour
 		else if (statusController.IsDead()) animator.SetBool("isDead", true);
 	}
 
-	public bool InAttackRange()
+	public bool InActionRange()
 	{
 		var distance = Vector3.Distance(transform.position, target.transform.position);
-		return distance <= attack.GetAttackRange();
+		return distance <= actionRange;
 	}
 
 	void ChooseAction()
 	{
-		if (!isPerformingAction && InAttackRange())
+		if (!isPerformingAction && InActionRange())
 		{
 			ratioTotal = attackChance + blockChance + idleChance;
 
@@ -98,26 +102,29 @@ public class EnemyAI : MonoBehaviour
 	IEnumerator BlockingAction()
 	{
 		isPerformingAction = true;
+		yield return new WaitForSecondsRealtime(actionWindUp);
+
 		statusController.isBlocking = true;
 		animator.SetBool("isBlocking", true);
 
-		yield return new WaitForSeconds(blockTime);
+		yield return new WaitForSecondsRealtime(blockTime);
 
-		isPerformingAction = false;
 		statusController.isBlocking = false;
 		animator.SetBool("isBlocking", false);
+
+		yield return new WaitForSecondsRealtime(actionCoolDown);
+		isPerformingAction = false;
 	}
 
 	IEnumerator AttackAction()
 	{
 		isPerformingAction = true;
-		yield return new WaitForSeconds(attackWindUp);
+		yield return new WaitForSecondsRealtime(actionWindUp);
 
 		animator.SetTrigger("attack");
 		attack.Attack(enemyMovement.isFacingRight);
 
-		yield return new WaitForSeconds(attackCoolDown);
-
+		yield return new WaitForSecondsRealtime(actionCoolDown);
 		isPerformingAction = false;
 	}
 

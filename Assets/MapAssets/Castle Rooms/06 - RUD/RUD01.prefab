@@ -3757,7 +3757,7 @@ MonoBehaviour:
   - {x: 16, y: -6, z: 0}
   m_ShapePathHash: -1457426075
   m_Mesh: {fileID: 0}
-  m_InstanceId: -394816
+  m_InstanceId: -1170488
 --- !u!1 &5037496009737883123
 GameObject:
   m_ObjectHideFlags: 0
@@ -9132,11 +9132,17 @@ MonoBehaviour:
   m_ShapePath:
   - {x: -16, y: -9, z: 0}
   - {x: -2, y: -9, z: 0}
+  - {x: -2, y: -8, z: 0}
+  - {x: -15, y: -8, z: 0}
+  - {x: -15, y: -5, z: 0}
+  - {x: -4, y: -5, z: 0}
+  - {x: -4, y: -6, z: 0}
+  - {x: -2, y: -6, z: 0}
   - {x: -2, y: 9, z: 0}
   - {x: -16, y: 9, z: 0}
-  m_ShapePathHash: 638973205
+  m_ShapePathHash: -1897159571
   m_Mesh: {fileID: 0}
-  m_InstanceId: -394804
+  m_InstanceId: -1170498
 --- !u!1 &6085480731608960344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9508,7 +9514,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6085480731608960344}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
   m_Name: 
@@ -9526,7 +9532,7 @@ MonoBehaviour:
   - {x: -16, y: 9, z: 0}
   m_ShapePathHash: 638973205
   m_Mesh: {fileID: 0}
-  m_InstanceId: -395012
+  m_InstanceId: -1170526
 --- !u!1 &6148088327064295738
 GameObject:
   m_ObjectHideFlags: 0
@@ -10032,9 +10038,15 @@ MonoBehaviour:
   - {x: 16, y: -3, z: 0}
   - {x: 16, y: 9, z: 0}
   - {x: 2, y: 9, z: 0}
-  m_ShapePathHash: -215912091
+  - {x: 2, y: 3, z: 0}
+  - {x: 4, y: 3, z: 0}
+  - {x: 4, y: 5, z: 0}
+  - {x: 12, y: 5, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  m_ShapePathHash: 569949757
   m_Mesh: {fileID: 0}
-  m_InstanceId: -394796
+  m_InstanceId: -1170514
 --- !u!251 &2788271410309749759
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -10099,7 +10111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7470931457805788653}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
   m_Name: 
@@ -10121,7 +10133,7 @@ MonoBehaviour:
   - {x: 6, y: -4, z: 0}
   m_ShapePathHash: -98471579
   m_Mesh: {fileID: 0}
-  m_InstanceId: -394768
+  m_InstanceId: -1170468
 --- !u!114 &1115382444878595257
 MonoBehaviour:
   m_ObjectHideFlags: 0
