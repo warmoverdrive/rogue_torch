@@ -1,6 +1,8 @@
 # "Rogue Torch"
 > CS50 Final Project // Using Unity 2019.4.11f1
 
+### [ItchIO Page](https://warmoverdrive.itch.io/rogue-torch) // *(Windows Only)*
+
 ## Learning Goals for this project:
 This project started with a set of goals as follows:
 * Produce a full Minimum Viable Product from scratch in ~2 weeks
